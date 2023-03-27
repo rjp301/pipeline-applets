@@ -1,5 +1,4 @@
 from http.server import BaseHTTPRequestHandler
-from werkzeug.utils import secure_filename
 
 import os
 import zipfile
