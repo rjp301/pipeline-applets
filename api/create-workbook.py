@@ -55,10 +55,10 @@ class handler(BaseHTTPRequestHandler):
     filename = os.path.join(path,body["filename"])
     filename = os.path.splitext(filename)[0] + ".xlsx"
 
-    with pd.ExcelWriter(filename) as writer:
-      for name,data in body["worksheets"].items():
-        df = pd.read_json(data)
-        print(df)
+    # with pd.ExcelWriter(filename) as writer:
+    for name,data in body["worksheets"].items():
+      df = pd.read_json(data)
+      print(df)
 
     self.send_json(body)
     return
