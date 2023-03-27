@@ -67,13 +67,8 @@
   </div>
 
   <button class="btn btn-primary" type="submit">Submit</button>
-  <a href="" class="btn btn-secondary">Clear</a>
 </form>
 
 
 <h2>Results</h2>
-<a
-  href=""
-  class="btn btn-primary"
-  >Download Excel</a
->
+
