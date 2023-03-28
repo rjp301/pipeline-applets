@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import pandas as pd
 import tempfile
 import json
+import shutil
 import os
 
 class handler(BaseHTTPRequestHandler):
@@ -39,6 +40,16 @@ class handler(BaseHTTPRequestHandler):
     self.end_headers()
     self.wfile.write(text.encode())
     return
+  
+  def send_file(self,fname:str):
+    with open(fname, 'rb') as file:
+      self.send_response(200)
+      self.send_header("Content-Type", 'application/octet-stream')
+      self.send_header("Content-Disposition", f"attachment; filename=\"{os.path.basename(fname)}\"")
+      fs = os.fstat(file.fileno())
+      self.send_header("Content-Length", str(fs.st_size))
+      self.end_headers()
+      shutil.copyfileobj(file, self.wfile)
 
   def do_POST(self):
     body = self.get_body()
@@ -55,10 +66,11 @@ class handler(BaseHTTPRequestHandler):
     filename = os.path.join(path,body["filename"])
     filename = os.path.splitext(filename)[0] + ".xlsx"
 
-    # with pd.ExcelWriter(filename) as writer:
-    for name,data in body["worksheets"].items():
-      df = pd.read_json(data)
-      print(df)
+    with pd.ExcelWriter(filename) as writer:
+      for name,data in body["worksheets"].items():
+        df = pd.DataFrame(data)
+        df.to_excel(writer,sheet_name=name,index=False)
 
-    self.send_json(body)
+    # self.send_json(body)
+    self.send_file(filename)
     return
