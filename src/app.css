@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
-    @apply text-2xl font-bold;
-  }
-  h2 {
-    @apply text-xl font-bold;
-  }
+  h1 { @apply text-2xl font-bold }
+  h2 { @apply text-xl font-bold }
+}
+
+@layer components {
+  button.btn { @apply bg-slate-600 text-gray-50 px-2 py-1 rounded }
+  label { @apply text-gray-500 text-sm block font-bold}
+  .form-caption { @apply text-gray-500 text-sm italic }
 }

@@ -7,6 +7,4 @@
   <a href="/centerlines">Centerlines</a>
   <a href="/topcon">TOPCON Ditch Volume</a>
 </nav>
-<main class="max-w-3xl p-4 mx-auto">
-  <slot />
-</main>
+<slot />
