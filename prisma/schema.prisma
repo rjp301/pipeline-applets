@@ -55,9 +55,9 @@ type TopconDataPts {
   y         Float
   x         Float
   z         Float
-  desc      String
+  desc      String?
   geometry  String
-  chainage  Float
+  chainage  Float?
   depth     Float?
   slope     Float?
   width_bot Float?
