@@ -28,11 +28,12 @@ model Centerline {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String
-  description String?
-  line        Json
-  markers     Json
-  footprint   Json
+  name         String
+  description  String?
+  line         Json
+  markers      Json
+  marker_value String
+  footprint    Json
 
   topcon_runs TopconRun[]
 
