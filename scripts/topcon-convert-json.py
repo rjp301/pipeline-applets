@@ -101,7 +101,7 @@ for index,run in enumerate(runs):
 
 
   # print(result)
-  fname = os.path.join(output_folder,f"{index:04d}_run.json")
+  fname = os.path.join(output_folder,f"run_{index:04d}.json")
   with open(fname,"w") as file:
     text = json.dumps(result)
     text = text.replace("NaN","null")

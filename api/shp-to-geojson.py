@@ -7,10 +7,16 @@ import geopandas as gpd
 import pandas as pd
 import tempfile
 
+# def unzip(fname):
+#   dir_fname = os.path.splitext(fname)[0]
+#   with zipfile.ZipFile(fname, "r") as zip_ref:
+#     zip_ref.extractall(dir_fname)
+
 class handler(BaseHTTPRequestHandler):
   """
   Expects zipped shapefile and returns geojson equivalent
   """
+
 
   def get_body(self) -> dict:
     content_len = int(self.headers.get("Content-Length"))
@@ -26,8 +32,13 @@ class handler(BaseHTTPRequestHandler):
     return
 
   def do_POST(self):
-    body = self.get_body()
-    self.send_json(body)
+    # Accept multi-part form containing zip file
+    # Unzip contents to temporary directory
+    # Load contents of shapefile into GeoDataFrame
+    # Convert GeoDataFrame to GeoJSON and send to client
+    # body = self.get_body()
+    # print(body)
+    self.send_json({"hellow":"world"})
     return
   
 
@@ -35,10 +46,7 @@ class handler(BaseHTTPRequestHandler):
 #   return "." in filename and filename.rsplit(".", 1)[1].lower() in ftypes
 
 
-# def unzip(fname):
-#   dir_fname = os.path.splitext(fname)[0]
-#   with zipfile.ZipFile(fname, "r") as zip_ref:
-#     zip_ref.extractall(dir_fname)
+
 
 
 # def find_shp(fname):
