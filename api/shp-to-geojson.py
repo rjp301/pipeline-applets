@@ -1,11 +1,27 @@
 from http.server import BaseHTTPRequestHandler
 
-import os
+import shapefile
 import zipfile
-import json
-import geopandas as gpd
-import pandas as pd
 import tempfile
+import os
+import json
+
+def get_file_w_ext(path,ext):
+  for file in os.listdir(path):
+     if os.path.splitext(file)[1].endswith(ext):
+        return os.path.join(path,file)
+  return None
+
+def shpzip_to_geojson(zip_fname):
+  zf = zipfile.ZipFile(zip_fname)
+  with tempfile.TemporaryDirectory() as tempdir:
+    zf.extractall(tempdir)
+    shp_fname = get_file_w_ext(tempdir,"shp")
+    if not shp_fname: return None
+    with shapefile.Reader(shp_fname) as shp:
+      geojson_data = shp.__geo_interface__
+      return geojson_data
+
 
 # def unzip(fname):
 #   dir_fname = os.path.splitext(fname)[0]
