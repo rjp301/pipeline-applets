@@ -1,6 +1,6 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: osx
-geopandas==0.12.2
+# geopandas==0.12.2
 openpyxl==3.0.10
 pandas==1.5.3
