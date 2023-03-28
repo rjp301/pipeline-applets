@@ -76,10 +76,11 @@ model TopconRun {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+
   width_bot      Float
   slope          Float
-  ditch_profile  Json
-  ground_profile Json
+  ditch_profile  String?
+  ground_profile Json?
   total_volume   Float
   data_pts       TopconDataPts[]
   data_rng       TopconDataRng[]
