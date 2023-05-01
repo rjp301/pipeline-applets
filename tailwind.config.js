@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
-    fontFamily: {
-      sans: ["Open Sans", "sans-serif"],
-    },
     extend: {},
   },
   plugins: [],

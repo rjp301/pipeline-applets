@@ -1,74 +1,69 @@
-<main class="max-w-3xl p-4 mx-auto flex flex-col gap-2">
-  <h1>TOPCON Ditch Volume</h1>
+<script lang="ts">
+  import FormInput from "../../components/FormInput.svelte";
+  import type { PageData } from "./$types";
+  export let data: PageData;
+</script>
 
-  <p>
-    Calculates the volume of a ditch based on the difference in height of the
-    designed ditch bottom and survey shots of construction grade, along with
-    side-wall slope and the width of ditch bottom.
-  </p>
-  <p>
-    Ensure Ditch Profile and Ground Shots are in the same UTM coordinate system
-    as the selected centerline.
-  </p>
+<form method="post" enctype="multipart/form-data" class="grid divide-y px-4">
+  <h2>Perform New Ditch Calculation</h2>
+  <FormInput
+    id="centerline_id"
+    label="Centerline"
+    selectOptions={data.centerlines}
+  />
 
-  <h2>Parameters</h2>
-  <form method="post" enctype="multipart/form-data" class="flex flex-col gap-2">
-    <div>
-      <label for="centerline">Centerline</label>
-      <input type="radio" name="" id="" />
-    </div>
+  <FormInput
+    id="slope"
+    label="Slope of Ditch Sides [slope:1]"
+    type="number"
+    placeholder="Select number"
+    min="0"
+    step="0.5"
+    required
+  />
 
-    <div>
-      <label for="slope">Slope of Ditch Sides [slope:1]</label>
-      <input
-        class="border rounded px-2 py-1 appearance-none w-full"
-        type="number"
-        name="slope"
-        step="0.5"
-        min="0"
-      />
-    </div>
+  <FormInput
+    id="width_bot"
+    label="Width of Ditch Bottom [m]"
+    type="number"
+    placeholder="Select number"
+    min="0"
+    step="0.5"
+    required
+  />
 
-    <div>
-      <label for="width_bot">Width of Ditch Bottom [m]</label>
-      <input
-        class="border rounded px-2 py-1 appearance-none w-full"
-        type="number"
-        name="width_bot"
-        step="0.5"
-        min="0"
-      />
-    </div>
+  <FormInput
+    id="ditch_shp"
+    type="file"
+    accept=".shp"
+    label="Designed Ditch Profile [SHP]"
+    subtext="3D SHP file of bottom of ditch"
+    required
+  />
 
-    <div>
-      <label for="ditch_profile">Designed Ditch Profile [SHP]</label>
-      <input
-        class="text-sm w-full"
-        type="file"
-        name="ditch_profile"
-        accept=".shp"
-      />
-      <p class="form-caption">3D SHP file of bottom of ditch</p>
-    </div>
+  <FormInput
+    id="ground_csv"
+    type="file"
+    accept=".csv"
+    label="Surveyed Ground Profile [CSV]"
+    subtext="Survey shots as CSV file in the format ID, X, Y, Z, DESC"
+    required
+  />
 
-    <div>
-      <label for="ground_profile">Surveyed Ground Profile [CSV]</label>
-      <input
-        class="text-sm w-full"
-        type="file"
-        name="ground_profile"
-        accept=".csv"
-      />
-      <p class="form-caption">
-        Survey shots as CSV file in the format ID, X, Y, Z, DESC
-      </p>
-    </div>
-
-    <div class="flex gap-4">
-      <button class="btn w-full" type="submit">Submit</button>
-      <button class="btn w-full" type="reset">Reset</button>
-    </div>
-  </form>
-
-  <h2>Results</h2>
-</main>
+  <FormInput
+    id="data_crs"
+    label="Data CRS [EPSG:####]"
+    type="text"
+    subtext="EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910'"
+    placeholder="Specify CRS"
+    required
+  />
+  <div class="flex gap-4 py-2">
+    <button class="px-1 py-1 w-full bg-red-500 rounded text-white" type="submit"
+      >Submit</button
+    >
+    <button class="px-1 py-1 w-full bg-gray-500 rounded text-white" type="reset"
+      >Reset</button
+    >
+  </div>
+</form>

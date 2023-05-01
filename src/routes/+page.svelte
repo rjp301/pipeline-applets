@@ -1,2 +1,2 @@
-<h1>Welcome to pipeline applets</h1>
-<p>the premier destination on the internet for tiny but useful apps for all your pipelining needs</p>
+<h1>Welcome to SvelteKit</h1>
+<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>

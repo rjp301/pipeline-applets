@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  h1 { @apply text-2xl font-bold }
-  h2 { @apply text-xl font-bold }
+* {
+  font-size: 14px;
 }
 
-@layer components {
-  button.btn { @apply bg-slate-600 text-gray-50 px-2 py-1 rounded }
-  label { @apply text-gray-500 text-sm block font-bold}
-  .form-caption { @apply text-gray-500 text-sm italic }
+@layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  h2 {
+    @apply text-xl font-bold;
+  }
+  h3 {
+    @apply text-lg italic;
+  }
 }
