@@ -1,10 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { redirect } from "@sveltejs/kit";
-  import type { PageData } from "./$types";
-  export let data: PageData;
-
-
+  import type { LayoutData } from "./$types";
+  export let data: LayoutData;
 </script>
 
 <div class="flex w-full">

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Table from "../../../components/Table.svelte";
+  import Table from "$lib/components/Table.svelte";
   import type { PageData } from "./$types";
   import { goto, invalidateAll, invalidate } from "$app/navigation";
 

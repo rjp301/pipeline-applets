@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FormInput from "../../components/FormInput.svelte";
+  import FormInput from "$lib/components/FormInput.svelte";
   import type { PageData } from "./$types";
   export let data: PageData;
 </script>
