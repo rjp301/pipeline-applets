@@ -4,15 +4,6 @@
   import { goto, invalidateAll, invalidate } from "$app/navigation";
 
   export let data: PageData;
-
-  const deleteTopconRun = async () => {
-    if (!confirm(`Are you certain you want to delete this run?`)) return;
-    await fetch(`http://127.0.0.1:8000/api/topcon/${data.topconRun.id}`, {
-      method: "DELETE",
-    });
-    await goto("/topcon");
-    invalidateAll()
-  };
 </script>
 
 <div class="flex justify-between items-center">
@@ -22,17 +13,18 @@
   </div>
 
   <div class="flex gap-2">
-    <button
-      on:click={deleteTopconRun}
-      class="bg-gray-500 px-8 py-2 text-white rounded shadow font-bold"
-    >
-      Delete
-    </button>
+    <form method="POST" action="?/delete">
+      <button class="bg-gray-500 px-8 py-2 text-white rounded shadow font-bold">
+        Delete
+      </button>
+    </form>
     <a
+      href={data.topconRunDownloadUrl}
       class="bg-red-500 px-8 py-2 text-white rounded shadow font-bold"
-      href={`http://127.0.0.1:8000/api/topcon/${data.topconRun.id}/download`}
-      download>Download Excel</a
+      download
     >
+      Download Excel
+    </a>
   </div>
 </div>
 <br />
