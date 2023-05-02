@@ -1,13 +1,17 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1>Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code>/src/routes/+layout.svelte</code> - barebones layout, the CSS import order is critical!</li>
-			<li><code>/src/app.postcss</code> - minimal css to make the page full screen, may not be relevant for your project</li>
-			<li><code>/src/routes/+page.svelte</code> - this page, you can replace the contents</li>
-		</ul>
+<div class="container h-full mx-auto flex justify-center items-center text-center max-w-lg">
+	<div class="card rounded">
+		<header class="card-header text-xl font-bold">Welcome to Pipeline Applets</header>
+		<section class="p-4 flex flex-col gap-2">
+			<p>Please login or sign up to continue</p>
+			<form action="POST" class="flex gap-4 w-full">
+				<button class="btn variant-filled-primary w-full">Login</button>
+				<button class="btn variant-filled-secondary w-full">Sign Up</button>
+			</form>
+		</section>
+		<footer class="card-footer">
+			<small>Built by <a href="https://rileypaul.ca" target="_blank">Riley Paul</a></small>
+		</footer>
 	</div>
 </div>

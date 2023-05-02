@@ -9,7 +9,9 @@
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<AppBar><h1>TOPCON Ditch Volume Calculation</h1></AppBar>
+		<AppBar>
+				<h1>⛏️ TOPCON Ditch Volume Calculation</h1>
+		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
 		<nav class="list-nav p-2">

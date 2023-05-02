@@ -68,7 +68,7 @@
 		<small> EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910' </small>
 	</label>
 
-	<div class="flex gap-4 py-2">
+	<div class="flex gap-4">
 		<button class="btn variant-filled-primary" type="submit">Submit</button>
 		<button class="btn variant-filled-secondary" type="reset">Reset</button>
 	</div>
