@@ -1,7 +1,6 @@
 import type { PageServerLoad } from "./$types";
 import { API_URL } from "$env/static/private";
 import { redirect, type Actions } from "@sveltejs/kit";
-import { goto, invalidateAll } from "$app/navigation";
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
   const response = await fetch(`${API_URL}/api/topcon/${params.id}`);

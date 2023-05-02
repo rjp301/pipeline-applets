@@ -1,7 +1,6 @@
 <script lang="ts">
   import Table from "$lib/components/Table.svelte";
   import type { PageData } from "./$types";
-  import { goto, invalidateAll, invalidate } from "$app/navigation";
 
   export let data: PageData;
 </script>

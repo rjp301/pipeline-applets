@@ -4,7 +4,11 @@
   export let data: PageData;
 </script>
 
-<form method="post" enctype="multipart/form-data" class="grid divide-y px-4">
+<form
+  method="POST"
+  enctype="multipart/form-data"
+  class="grid divide-y px-4"
+>
   <h2>Perform New Ditch Calculation</h2>
   <FormInput
     id="centerline_id"

@@ -12,7 +12,8 @@
     return num.toFixed(cutoff);
   };
 
-  const displayValue = (value: number | string) => {
+  const displayValue = (value: number | string | null) => {
+    if (value === null) return ""
     if (typeof value === "string") return value;
     return displayNumber(value, 2);
   };
