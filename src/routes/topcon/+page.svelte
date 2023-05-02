@@ -3,7 +3,12 @@
 	export let data: PageData;
 </script>
 
-<form method="POST" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
+<form
+	method="POST"
+	action="?/performRun"
+	enctype="multipart/form-data"
+	class="p-4 flex flex-col gap-4"
+>
 	<h2>Perform New Ditch Volume Calculation</h2>
 	<label for="centerline_id" class="label">
 		<span>Centerline</span>

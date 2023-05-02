@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import Table from '$lib/components/Table.svelte';
 
@@ -36,12 +37,12 @@
 		</div>
 
 		<div class="flex gap-2">
-			<form method="POST">
+			<form method="POST" class="flex gap-4">
 				<button formaction="?/deleteRun" class="btn variant-filled"> Delete </button>
-				<button formaction="?/downloadExcel" class="btn variant-filled-primary">
-					Download Excel
-				</button>
 			</form>
+			<a href={$page.url.pathname + '/download'} download class="btn variant-filled-primary">
+				Download Excel
+			</a>
 		</div>
 	</div>
 
