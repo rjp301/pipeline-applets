@@ -19,11 +19,11 @@
   };
 </script>
 
-<div class="relative overflow-x-auto mb-8 p-2">
-  <table class="w-full text-center">
-    <thead class="uppercase bg-gray-100">
+<div class="table-container rounded">
+  <table class="table table-compact table-hover rounded">
+    <thead class="uppercase">
       {#each columns as column}
-        <th scope="col" class="px-2 py-1">{column}</th>
+        <th scope="col">{column}</th>
       {/each}
     </thead>
     <tbody class="text-sm">

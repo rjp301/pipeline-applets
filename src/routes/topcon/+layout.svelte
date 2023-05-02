@@ -1,8 +1,16 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { AppShell, AppRail, AppBar } from "@skeletonlabs/skeleton";
+  import {
+    AppShell,
+    AppRail,
+    AppRailTile,
+    AppBar,
+  } from "@skeletonlabs/skeleton";
   import type { LayoutData } from "./$types";
   export let data: LayoutData;
+
+  $: classesActive = (href: string) =>
+    href === $page.url.pathname ? "!bg-primary-500" : "";
 </script>
 
 <AppShell>
@@ -10,18 +18,30 @@
     <AppBar><h1>Topcon Ditch Volume Calculation</h1></AppBar>
   </svelte:fragment>
   <svelte:fragment slot="sidebarLeft">
-    <a href={`/topcon`}>
-      <div class:font-bold={$page.url.pathname == "/topcon"}>
-        ➕ New Calculation
-      </div>
-    </a>
-    {#each data.topconRuns as run}
-      <a href={`/topcon/${run.id}`}>
-        <div class:font-bold={$page.url.pathname.includes(`/topcon/${run.id}`)}>
-          {run.KP_rng}
-        </div>
-      </a>
-    {/each}
+    <nav class="list-nav p-2">
+      <a
+        href="/topcon"
+        class={"btn variant-outline-primary mb-4"}
+        class:bg-primary-500={$page.url.pathname === "/topcon"}
+      >
+        <span class="badge bg-primary-500">+</span>
+        <span class="flex-auto">New Calculation</span></a
+      >
+      <span class="font-bold px-2">Previous Calculations</span>
+      <ul>
+        {#each data.topconRuns as run}
+          <li>
+            <a
+              href={`/topcon/${run.id}`}
+              class={classesActive(`/topcon/${run.id}`)}
+            >
+              <span class="badge bg-primary-500">→</span>
+              <span class="flex-auto">{run.KP_rng}</span>
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
   </svelte:fragment>
   <slot />
 </AppShell>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { Table, tableMapperValues } from "@skeletonlabs/skeleton";
-  import type { TableSource } from "@skeletonlabs/skeleton";
+  import Table from "$lib/components/Table.svelte";
 
   export let data: PageData;
 
@@ -44,46 +43,37 @@
     return displayNumber(value, 2);
   };
 
-  const tableSourcePts: TableSource = {
-    head: data_pts_head,
-    body: tableMapperValues(data.topconRun.data_pts, data_pts_head),
-  };
-
-  const tableSourceRng: TableSource = {
-    head: data_pts_head,
-    body: tableMapperValues(data.topconRun.data_rng, data_rng_head),
-  };
 </script>
 
-<div class="flex justify-between items-center">
-  <div>
-    <h2>Ditch Volume Calculation - {data.topconRun.KP_rng}</h2>
-    <p>{new Date(data.topconRun.createdAt)}</p>
-  </div>
+<main class="p-4">
+  <div class="flex justify-between items-center">
+    <div>
+      <h2>{data.topconRun.KP_rng}</h2>
+      <span>{new Date(data.topconRun.createdAt)}</span>
+    </div>
 
-  <div class="flex gap-2">
-    <form method="POST" action="?/delete">
-      <button class="bg-gray-500 px-8 py-2 text-white rounded shadow font-bold">
-        Delete
-      </button>
-    </form>
-    <a
-      href={data.topconRunDownloadUrl}
-      class="bg-red-500 px-8 py-2 text-white rounded shadow font-bold"
-      download
-    >
-      Download Excel
-    </a>
+    <div class="flex gap-2">
+      <form method="POST" action="?/delete">
+        <button class="btn variant-filled"> Delete </button>
+      </form>
+      <a
+        href={data.topconRunDownloadUrl}
+        class="btn variant-filled-primary"
+        download
+      >
+        Download Excel
+      </a>
+    </div>
   </div>
-</div>
-<br />
-<div class="text-lg font-bold text-red-500">
-  Total Volume: {Math.round(data.topconRun.total_volume)} m<sup>3</sup>
-</div>
-<div>Width Bottom: {data.topconRun.width_bot}m</div>
-<div>Slope: {data.topconRun.slope}:1</div>
-<h3>Point Data</h3>
-<Table source={tableSourcePts} />
+  <br />
+  <div class="text-lg font-bold text-red-500">
+    Total Volume: {Math.round(data.topconRun.total_volume)} m<sup>3</sup>
+  </div>
+  <div>Width Bottom: {data.topconRun.width_bot}m</div>
+  <div>Slope: {data.topconRun.slope}:1</div>
+  <h3>Point Data</h3>
+  <Table columns={data_pts_head} data={data.topconRun.data_pts} />
 
-<h3>Range Data</h3>
-<Table source={tableSourceRng} />
+  <h3>Range Data</h3>
+  <Table columns={data_rng_head} data={data.topconRun.data_rng} />
+</main>

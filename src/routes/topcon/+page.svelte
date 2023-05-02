@@ -4,7 +4,7 @@
 </script>
 
 <form method="POST" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
-  <h2>Perform New Ditch Calculation</h2>
+  <h2>Perform New Ditch Volume Calculation</h2>
   <label for="centerline_id" class="label"
     ><span>Centerline</span>
     <select id="centerline_id" class="select" required>
