@@ -1,73 +1,73 @@
 <script lang="ts">
-  import FormInput from "$lib/components/FormInput.svelte";
   import type { PageData } from "./$types";
   export let data: PageData;
 </script>
 
-<form
-  method="POST"
-  enctype="multipart/form-data"
-  class="grid divide-y px-4"
->
+<form method="POST" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
   <h2>Perform New Ditch Calculation</h2>
-  <FormInput
-    id="centerline_id"
-    label="Centerline"
-    selectOptions={data.centerlines}
-  />
+  <label for="centerline_id" class="label"
+    ><span>Centerline</span>
+    <select id="centerline_id" class="select" required>
+      {#each data.centerlines as centerline}
+        <option value={centerline.id}>{centerline.name}</option>
+      {/each}
+    </select>
+  </label>
 
-  <FormInput
-    id="slope"
-    label="Slope of Ditch Sides [slope:1]"
-    type="number"
-    placeholder="Select number"
-    min="0"
-    step="0.5"
-    required
-  />
+  <label for="slope" class="label">
+    <span>Slope of Ditch Sides [slope:1]</span>
+    <input
+    title="hello there"
+      class="input"
+      id="slope"
+      type="number"
+      placeholder="Enter number"
+      min="0"
+      step="0.5"
+      required
+    />
+  </label>
 
-  <FormInput
-    id="width_bot"
-    label="Width of Ditch Bottom [m]"
-    type="number"
-    placeholder="Select number"
-    min="0"
-    step="0.5"
-    required
-  />
+  <label for="width_bot" class="label">
+    <span>Width of Ditch Bottom [m]</span>
+    <input
+      class="input"
+      id="width_bot"
+      type="number"
+      placeholder="Enter number"
+      min="0"
+      step="0.5"
+      required
+    />
+  </label>
 
-  <FormInput
-    id="ditch_shp"
-    type="file"
-    accept=".shp"
-    label="Designed Ditch Profile [SHP]"
-    subtext="3D SHP file of bottom of ditch"
-    required
-  />
+  <label for="ditch_shp" class="label">
+    <span>Designed Ditch Profile [SHP]</span>
+    <input class="input" id="ditch_shp" type="file" accept=".shp" required />
+    <small>3D SHP file of bottom of ditch</small>
+  </label>
 
-  <FormInput
-    id="ground_csv"
-    type="file"
-    accept=".csv"
-    label="Surveyed Ground Profile [CSV]"
-    subtext="Survey shots as CSV file in the format ID, X, Y, Z, DESC"
-    required
-  />
+  <label for="ground_csv" class="label">
+    <span>Surveyed Ground Profile [CSV]</span>
+    <input class="input" id="ground_csv" type="file" accept=".csv" required />
+    <small>Survey shots as CSV file in the format ID, X, Y, Z, DESC</small>
+  </label>
 
-  <FormInput
-    id="data_crs"
-    label="Data CRS [EPSG:####]"
-    type="text"
-    subtext="EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910'"
-    placeholder="Specify CRS"
-    required
-  />
+  <label for="data_crs" class="label">
+    <span>Data CRS [EPSG:####]</span>
+    <input
+      class="input"
+      id="data_crs"
+      type="text"
+      placeholder="Specify CRS"
+      required
+    />
+    <small>
+      EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910'
+    </small>
+  </label>
   <div class="flex gap-4 py-2">
-    <button class="btn px-1 py-1 w-full bg-red-500 rounded text-white" type="submit"
-      >Submit</button
-    >
-    <button class="px-1 py-1 w-full bg-gray-500 rounded text-white" type="reset"
-      >Reset</button
-    >
+    <button class="btn variant-filled-primary" type="submit">Submit</button>
+    <button class="btn variant-filled-secondary" type="reset">Reset</button>
   </div>
 </form>

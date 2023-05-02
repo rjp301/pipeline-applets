@@ -1,8 +1,58 @@
 <script lang="ts">
-  import Table from "$lib/components/Table.svelte";
   import type { PageData } from "./$types";
+  import { Table, tableMapperValues } from "@skeletonlabs/skeleton";
+  import type { TableSource } from "@skeletonlabs/skeleton";
 
   export let data: PageData;
+
+  const data_pts_head = [
+    "num",
+    "x",
+    "y",
+    "z",
+    "desc",
+    "chainage",
+    "slope",
+    "width_bot",
+    "width_top",
+    "area",
+  ];
+
+  const data_rng_head = [
+    "KP_beg",
+    "KP_end",
+    "area_beg",
+    "area_end",
+    "area_avg",
+    "length",
+    "volume",
+  ];
+
+  const countDecimals = (num: number) => {
+    if (Math.floor(num) === num) return 0;
+    return num.toString().split(".")[1].length;
+  };
+
+  const displayNumber = (num: number, cutoff: number) => {
+    if (countDecimals(num) <= cutoff) return num.toString();
+    return num.toFixed(cutoff);
+  };
+
+  const displayValue = (value: number | string | null) => {
+    if (value === null) return "";
+    if (typeof value === "string") return value;
+    return displayNumber(value, 2);
+  };
+
+  const tableSourcePts: TableSource = {
+    head: data_pts_head,
+    body: tableMapperValues(data.topconRun.data_pts, data_pts_head),
+  };
+
+  const tableSourceRng: TableSource = {
+    head: data_pts_head,
+    body: tableMapperValues(data.topconRun.data_rng, data_rng_head),
+  };
 </script>
 
 <div class="flex justify-between items-center">
@@ -32,37 +82,8 @@
 </div>
 <div>Width Bottom: {data.topconRun.width_bot}m</div>
 <div>Slope: {data.topconRun.slope}:1</div>
-<details>
-  <summary> Point Data</summary>
-  <Table
-    columns={[
-      "num",
-      "x",
-      "y",
-      "z",
-      "desc",
-      "chainage",
-      "slope",
-      "width_bot",
-      "width_top",
-      "area",
-    ]}
-    data={data.topconRun.data_pts}
-  />
-</details>
+<h3>Point Data</h3>
+<Table source={tableSourcePts} />
 
-<details>
-  <summary>Range Data</summary>
-  <Table
-    columns={[
-      "KP_beg",
-      "KP_end",
-      "area_beg",
-      "area_end",
-      "area_avg",
-      "length",
-      "volume",
-    ]}
-    data={data.topconRun.data_rng}
-  />
-</details>
+<h3>Range Data</h3>
+<Table source={tableSourceRng} />

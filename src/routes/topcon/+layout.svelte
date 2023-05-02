@@ -1,32 +1,27 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import { AppShell, AppRail, AppBar } from "@skeletonlabs/skeleton";
   import type { LayoutData } from "./$types";
   export let data: LayoutData;
 </script>
 
-<div class="flex w-full">
-  <aside class="w-fit h-screen bg-slate-50 sticky top-0 left-0">
+<AppShell>
+  <svelte:fragment slot="header">
+    <AppBar><h1>Topcon Ditch Volume Calculation</h1></AppBar>
+  </svelte:fragment>
+  <svelte:fragment slot="sidebarLeft">
     <a href={`/topcon`}>
-      <div
-        class="py-2 px-4 whitespace-nowrap border-b"
-        class:font-bold={$page.url.pathname == "/topcon"}
-      >
+      <div class:font-bold={$page.url.pathname == "/topcon"}>
         ➕ New Calculation
       </div>
     </a>
     {#each data.topconRuns as run}
       <a href={`/topcon/${run.id}`}>
-        <div
-          class="py-2 px-4 whitespace-nowrap border-b"
-          class:font-bold={$page.url.pathname.includes(`/topcon/${run.id}`)}
-        >
+        <div class:font-bold={$page.url.pathname.includes(`/topcon/${run.id}`)}>
           {run.KP_rng}
         </div>
       </a>
     {/each}
-  </aside>
-
-  <main class="flex-1 px-4 py-2">
-    <slot />
-  </main>
-</div>
+  </svelte:fragment>
+  <slot />
+</AppShell>
