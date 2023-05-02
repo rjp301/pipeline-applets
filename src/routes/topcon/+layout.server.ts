@@ -1,10 +1,6 @@
 import type { LayoutServerLoad } from './$types';
-import { API_URL } from '$env/static/private';
+import prisma from '$lib/server/prisma';
 
-export const load: LayoutServerLoad = async ({ fetch }) => {
-	const response = await fetch(`${API_URL}/api/topcon/`);
-	const data = await response.json();
-	return {
-		topconRuns: data
-	};
+export const load: LayoutServerLoad = async () => {
+	return { topconRuns: prisma.topconRun.findMany() };
 };

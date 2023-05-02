@@ -36,12 +36,12 @@
 		</div>
 
 		<div class="flex gap-2">
-			<form method="POST" action="?/delete">
-				<button class="btn variant-filled"> Delete </button>
+			<form method="POST">
+				<button formaction="?/deleteRun" class="btn variant-filled"> Delete </button>
+				<button formaction="?/downloadExcel" class="btn variant-filled-primary">
+					Download Excel
+				</button>
 			</form>
-			<a href={data.topconRunDownloadUrl} class="btn variant-filled-primary" download>
-				Download Excel
-			</a>
 		</div>
 	</div>
 

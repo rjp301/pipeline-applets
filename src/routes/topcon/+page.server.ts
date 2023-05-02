@@ -1,19 +1,16 @@
 import type { PageServerLoad } from './$types';
-import { API_URL } from '$env/static/private';
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ fetch }) => {
-	const response = await fetch(`${API_URL}/api/centerline/`);
-	const data = await response.json();
-	return {
-		centerlines: data,
-		topconRunSubmitUrl: `${API_URL}/api/topcon/`
-	};
+import { API_URL } from '$env/static/private';
+import { redirect } from '@sveltejs/kit';
+import prisma from '$lib/server/prisma';
+
+export const load: PageServerLoad = async () => {
+	return { centerlines: await prisma.centerline.findMany() };
 };
 
 export const actions: Actions = {
-	default: async ({ request, fetch }) => {
+	performRun: async ({ request, fetch }) => {
 		const formData = await request.formData();
 		console.log(formData);
 
