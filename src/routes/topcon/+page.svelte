@@ -63,7 +63,7 @@
     required
   />
   <div class="flex gap-4 py-2">
-    <button class="px-1 py-1 w-full bg-red-500 rounded text-white" type="submit"
+    <button class="btn px-1 py-1 w-full bg-red-500 rounded text-white" type="submit"
       >Submit</button
     >
     <button class="px-1 py-1 w-full bg-gray-500 rounded text-white" type="reset"
