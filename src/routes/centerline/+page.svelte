@@ -1,6 +1,5 @@
 <form
 	method="POST"
-	action="?/createCenterline"
 	enctype="multipart/form-data"
 	class="p-4 flex flex-col gap-4"
 >

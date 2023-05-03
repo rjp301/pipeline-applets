@@ -7,8 +7,16 @@
 </script>
 
 <main class="p-4">
-	<h2>{centerline.name}</h2>
-	<p>{centerline.description}</p>
+	<div class="flex justify-between items-center">
+		<div>
+			<h2>{centerline.name}</h2>
+			<small>{centerline.description}</small>
+		</div>
+
+		<form action="?/delete" method="post">
+			<button class="btn variant-filled">Delete</button>
+		</form>
+	</div>
 
 	<Plot />
 </main>

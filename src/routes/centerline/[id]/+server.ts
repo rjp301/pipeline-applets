@@ -2,19 +2,17 @@ import prisma from '$lib/server/prisma';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 
-/** Get specific Topcon Run */
+/** Get specific Centerline */
 export const GET: RequestHandler = async ({ params }) => {
 	return json(
-		await prisma.topconRun.findUnique({
+		await prisma.centerline.findUnique({
 			where: { id: Number(params.id) },
-			include: {
-				data_pts: true,
-				data_rng: true
-			}
+			include: { markers: true }
 		})
 	);
 };
 
+/** Delete Centerline */
 export const DELETE: RequestHandler = async ({ params }) => {
-	return json(await prisma.topconRun.delete({ where: { id: Number(params.id) } }));
+	return json(await prisma.centerline.delete({ where: { id: Number(params.id) } }));
 };
