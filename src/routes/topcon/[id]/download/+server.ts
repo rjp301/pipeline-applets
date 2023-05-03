@@ -27,9 +27,15 @@ const data_rng_headers = [
 	'volume'
 ];
 
-const convertRecord = (record: object, headers: string[]) =>
+interface Record {
+	[key: string]: string | number | boolean | null | undefined;
+}
+
+const convertRecord = (record: Record, headers: Array<keyof Record>): Record =>
 	Object.fromEntries(
-		headers.filter((key) => key in record).map((key) => [key.toUpperCase(), record[key]])
+		headers
+			.filter((key) => key in record)
+			.map((key) => [typeof key === 'string' ? key.toUpperCase() : key, record[key]])
 	);
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
@@ -43,11 +49,15 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 		sheets: [
 			{
 				sheetname: 'data_pts',
-				records: data.data_pts.map((record: object) => convertRecord(record, data_pts_headers))
+				records: data.data_pts.map((record: object) =>
+					convertRecord(record as Record, data_pts_headers)
+				)
 			},
 			{
 				sheetname: 'data_rng',
-				records: data.data_rng.map((record: object) => convertRecord(record, data_rng_headers))
+				records: data.data_rng.map((record: object) =>
+					convertRecord(record as Record, data_rng_headers)
+				)
 			}
 		]
 	};
