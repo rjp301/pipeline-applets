@@ -21,13 +21,42 @@ export const actions: Actions = {
 		formData.append('centerline', JSON.stringify(centerline));
 
 		try {
-			const res = await fetch(`${API_URL}/api/topcon/`, {
+			const response = await fetch(`${API_URL}/api/topcon/`, {
 				method: 'POST',
 				body: formData,
 				headers: { boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW' }
 			});
-			const topconRun = await res.json();
-			throw redirect(303, `/topcon/${topconRun.id}`);
+
+			const {
+				width_bot,
+				slope,
+				ditch_profile,
+				total_volume,
+				data_crs,
+				KP_beg,
+				KP_end,
+				KP_rng,
+				data_pts,
+				data_rng
+			} = await response.json();
+
+			const newItem = await prisma.topconRun.create({
+				data: {
+					width_bot,
+					slope,
+					ditch_profile,
+					total_volume,
+					data_crs,
+					KP_beg,
+					KP_end,
+					KP_rng,
+					centerline_id: centerline.id,
+					data_pts: { createMany: { data: data_pts } },
+					data_rng: { createMany: { data: data_rng } }
+				}
+			});
+
+			throw redirect(303, `/topcon/${newItem.id}`);
 		} catch (err) {
 			console.error(err);
 		}
