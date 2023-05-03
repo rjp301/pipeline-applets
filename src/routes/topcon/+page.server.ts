@@ -16,7 +16,7 @@ export const actions: Actions = {
 
 		const { centerline_id } = Object.fromEntries(formData);
 		console.log('centerline_id', centerline_id);
-		const centerline = await prisma.centerline.findUnique({ where: { id: centerline_id } });
+		const centerline = await prisma.centerline.findUnique({ where: { id: Number(centerline_id) } });
 
 		formData.append('centerline', JSON.stringify(centerline));
 
