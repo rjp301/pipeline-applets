@@ -1,7 +1,3 @@
-<script lang="ts">
-	import type { PageData } from './$types';
-</script>
-
 <form
 	method="POST"
 	action="?/createCenterline"
@@ -26,17 +22,6 @@
 		/>
 	</label>
 
-  <label for="marker_value_col" class="label">
-		<span>Marker Value Column</span>
-		<input
-			class="input"
-			id="marker_value_col"
-			name="marker_value_col"
-			type="text"
-			placeholder="Centerline Description"
-		/>
-	</label>
-
 	<label for="shp_line" class="label">
 		<span>Line Shapefile</span>
 		<input class="input" id="shp_line" name="shp_line" type="file" accept=".zip" required />
@@ -44,7 +29,17 @@
 
 	<label for="shp_markers" class="label">
 		<span>Markers Shapefile</span>
-		<input class="input" id="shp_markers" name="shp_markers" type="file" accept=".zip" required />
+		<div class="flex gap-4">
+			<input class="input" id="shp_markers" name="shp_markers" type="file" accept=".zip" required />
+			<input
+				class="input"
+				id="marker_value_col"
+				name="marker_value_col"
+				type="text"
+				placeholder="Value Column"
+				required
+			/>
+		</div>
 	</label>
 
 	<div class="flex gap-4">

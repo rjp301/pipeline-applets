@@ -6,10 +6,13 @@ export const actions: Actions = {
 		const res = await fetch(`/api/centerline`, {
 			method: 'POST',
 			body: formData,
-			headers: { boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW' }
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW'
+			}
 		});
 		const data = await res.json();
 
-		console.log(data)
+		console.log(data);
 	}
 };

@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import type { LayoutData } from './$types';
+	import type { TopconRun } from '@prisma/client';
 
-	import {format} from "timeago.js"
+	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { format } from 'timeago.js';
+	import NavList from '$lib/components/NavList.svelte';
 
 	export let data: LayoutData;
 
-	const rtf = new Intl.RelativeTimeFormat('en', { style: 'short', numeric: 'auto' });
-
-	$: classesActive = (href: string) => (href === $page.url.pathname ? '!bg-primary-500' : '');
+	const formatTopconRun = (run: TopconRun) => ({
+		href: `/topcon/${run.id}`,
+		name: run.KP_rng,
+		details: format(run.createdAt)
+	});
+	$: items = data.topconRuns.map(formatTopconRun);
 </script>
 
 <AppShell>
@@ -19,26 +23,7 @@
 		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
-		<nav class="list-nav p-2">
-			<a href="/topcon" class={'variant-outline-primary mb-4 ' + classesActive('/topcon')}>
-				<span class="badge bg-primary-500">+</span>
-				<span class="flex-auto">New Calculation</span></a
-			>
-			<span class="font-bold px-2">Previous Calculations</span>
-			<ul>
-				{#each data.topconRuns as run}
-					<li>
-						<a href={`/topcon/${run.id}`} class={classesActive(`/topcon/${run.id}`)}>
-							<span class="badge bg-primary-500">→</span>
-							<div class="flex flex-col">
-								<span class="flex-auto">{run.KP_rng}</span>
-								<small>{format(run.createdAt)}</small>
-							</div>
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
+		<NavList {items} home={{ href: '/topcon', name: 'New Calculation' }} />
 	</svelte:fragment>
 	<slot />
 </AppShell>
