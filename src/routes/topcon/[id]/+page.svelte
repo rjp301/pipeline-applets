@@ -54,13 +54,6 @@
 		<span class="chip variant-outline">Ditch Slope {data.topconRun.slope}:1</span>
 	</div>
 
-	<div>
-		<h3 class="mb-2">Point Data</h3>
-		<Table columns={data_pts_head} data={data.topconRun.data_pts} />
-	</div>
-
-	<div>
-		<h3 class="mb-2">Range Data</h3>
-		<Table columns={data_rng_head} data={data.topconRun.data_rng} />
-	</div>
+	<Table columns={data_pts_head} data={data.topconRun.data_pts} caption="Point Data" />
+	<Table columns={data_rng_head} data={data.topconRun.data_rng} caption="Range Data" />
 </main>
