@@ -22,7 +22,6 @@
 	<label for="slope" class="label">
 		<span>Slope of Ditch Sides [slope:1]</span>
 		<input
-			title="hello there"
 			class="input"
 			id="slope"
 			name="slope"
