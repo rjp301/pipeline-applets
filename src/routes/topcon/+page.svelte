@@ -67,6 +67,7 @@
 			name="data_crs"
 			type="text"
 			placeholder="Specify CRS"
+			value="EPSG:26910"
 			required
 		/>
 		<small> EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910' </small>
