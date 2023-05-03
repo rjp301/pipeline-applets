@@ -1,1 +1,0 @@
-Detailed info about centerline and editable information

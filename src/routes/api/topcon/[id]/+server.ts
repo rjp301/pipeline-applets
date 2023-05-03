@@ -14,3 +14,7 @@ export const GET: RequestHandler = async ({ params }) => {
 		})
 	);
 };
+
+export const DELETE: RequestHandler = async ({ params }) => {
+	return json(await prisma.topconRun.delete({ where: { id: Number(params.id) } }));
+};
