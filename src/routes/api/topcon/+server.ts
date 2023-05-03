@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 
 /** Get all Topcon Runs */
 export const GET: RequestHandler = async () => {
-	return json(await prisma.topconRun.findMany());
+	return json(await prisma.topconRun.findMany({ orderBy: [{ createdAt: 'desc' }] }));
 };
 
 /** Create topcon Run */

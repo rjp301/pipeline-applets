@@ -5,8 +5,8 @@ import { API_URL } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
 import prisma from '$lib/server/prisma';
 
-export const load: PageServerLoad = async () => {
-	return { centerlines: await prisma.centerline.findMany() };
+export const load: PageServerLoad = async ({ fetch }) => {
+	return { centerlines: fetch('/api/centerline').then((res) => res.json()) };
 };
 
 export const actions: Actions = {
@@ -16,10 +16,7 @@ export const actions: Actions = {
 
 		const { centerline_id } = Object.fromEntries(formData);
 		console.log('centerline_id', centerline_id);
-		const centerline = await prisma.centerline.findUnique({
-			where: { id: Number(centerline_id) },
-			include: { markers: true }
-		});
+		const centerline = await fetch(`/api/centerline/${centerline_id}`);
 
 		formData.append('centerline', JSON.stringify(centerline));
 
