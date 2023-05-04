@@ -1,4 +1,3 @@
-import { API_URL } from '$env/static/private';
 import prisma from '$lib/server/prisma';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
@@ -14,28 +13,17 @@ export const GET: RequestHandler = async () => {
 
 /** Create Centerline */
 export const POST: RequestHandler = async ({ request }) => {
-	const formData = await request.formData();
-	const { name, desciption } = await Object.fromEntries(formData.entries());
-
-	const data = await fetch(`${API_URL}/api/centerline/`, {
-		method: 'POST',
-		body: formData,
-		headers: { boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW' }
-	})
-		.then((res) => res.json())
-		.catch((err) => {
-			console.log('Could not access calculaton API');
-			console.error(err);
-		});
+	const data = await request.json();
+	const { name, description, line, crs, markers } = data;
 
 	return json(
 		await prisma.centerline.create({
 			data: {
-				name: name,
-				desciption: desciption,
-				line: data.line,
-				crs: data.crs,
-				markers: { createMany: { data: data.markers } }
+				name,
+				description,
+				line,
+				crs,
+				markers: { createMany: { data: markers } }
 			}
 		})
 	);

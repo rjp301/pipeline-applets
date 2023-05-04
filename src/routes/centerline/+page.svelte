@@ -1,8 +1,4 @@
-<form
-	method="POST"
-	enctype="multipart/form-data"
-	class="p-4 flex flex-col gap-4"
->
+<form method="POST" action="?/create" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
 	<h2>Create new Centerline</h2>
 
 	<label for="name" class="label">
@@ -36,6 +32,7 @@
 				name="marker_value_col"
 				type="text"
 				placeholder="Value Column"
+				value="Measure"
 				required
 			/>
 		</div>

@@ -32,10 +32,12 @@ model Centerline {
   id          Int                @id @default(autoincrement())
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
+
   name        String             @default("")
   description String             @default("")
   line        String
   crs         String             @default("ESPG:4326")
+  
   markers     CenterlineMarker[]
   topcon_runs TopconRun[]
 

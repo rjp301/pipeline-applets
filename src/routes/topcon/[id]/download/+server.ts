@@ -1,4 +1,3 @@
-import prisma from '$lib/server/prisma';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { API_URL } from '$env/static/private';
@@ -39,10 +38,7 @@ const convertRecord = (record: Record, headers: Array<keyof Record>): Record =>
 	);
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
-	const data = await prisma.topconRun.findUniqueOrThrow({
-		where: { id: Number(params.id) },
-		include: { data_pts: true, data_rng: true }
-	});
+	const data = await fetch(`/topcon/${params.id}`).then((res) => res.json());
 
 	const xlsxData = {
 		filename: `${data.KP_rng}.xlsx`,

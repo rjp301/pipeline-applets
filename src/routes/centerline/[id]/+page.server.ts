@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 };
 
 export const actions: Actions = {
-	delete: async ({ params }) => {
+	delete: async ({ params, fetch }) => {
 		await fetch(`/centerline/${params.id}`, { method: 'DELETE' });
 		throw redirect(303, '/centerline');
 	}
