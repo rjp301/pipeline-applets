@@ -6,7 +6,7 @@ import { redirect } from '@sveltejs/kit';
 import prisma from '$lib/server/prisma';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	return { centerlines: fetch('/api/centerline').then((res) => res.json()) };
+	return { centerlines: fetch('/centerline').then((res) => res.json()) };
 };
 
 export const actions: Actions = {
@@ -16,7 +16,7 @@ export const actions: Actions = {
 
 		const { centerline_id } = Object.fromEntries(formData);
 		console.log('centerline_id', centerline_id);
-		const centerline = await fetch(`/api/centerline/${centerline_id}`);
+		const centerline = await fetch(`/centerline/${centerline_id}`).then((res) => res.json());
 
 		formData.append('centerline', JSON.stringify(centerline));
 

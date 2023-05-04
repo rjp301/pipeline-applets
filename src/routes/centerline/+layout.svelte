@@ -19,7 +19,9 @@
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar>
-			<h1>📈 Centerlines</h1>
+			<a href="/">
+				<h1>📈 Centerlines</h1>
+			</a>
 		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">

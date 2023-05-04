@@ -3,14 +3,13 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const { centerline } = data;
 </script>
 
 <main class="p-4">
-	<div class="flex justify-between items-center">
+	<div class="flex justify-between">
 		<div>
-			<h2>{centerline.name}</h2>
-			<small>{centerline.description}</small>
+			<h2>{data.centerline.name}</h2>
+			<small>{data.centerline.description}</small>
 		</div>
 
 		<form action="?/delete" method="post">
