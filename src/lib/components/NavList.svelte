@@ -8,17 +8,17 @@
 
 	export let items: Item[];
 	export let home: Item | undefined = undefined;
-	export let header: string | undefined = undefined;
+	export let header: string = '';
 
 	import { page } from '$app/stores';
 	$: classesActive = (href: string) => (href === $page.url.pathname ? '!bg-primary-500' : '');
 </script>
 
-<nav class="list-nav p-2">
+<nav class="list-nav p-2 grid gap-2">
 	{#if home}
 		<a
 			href={home.href}
-			class={'variant-outline-primary mb-4 ' + classesActive(home.href)}
+			class={'variant-outline-primary mb-2 ' + classesActive(home.href)}
 			data-sveltekit-preload-data
 		>
 			<span class="badge bg-primary-500">{home.badge || '+'}</span>
@@ -26,7 +26,7 @@
 		</a>
 	{/if}
 	{#if header}
-		<span class="font-bold px-2">{header}</span>
+		<span class="font-bold px-2 text-lg">{header}</span>
 	{/if}
 	<ul>
 		{#each items as item}

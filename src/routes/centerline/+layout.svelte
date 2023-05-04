@@ -3,7 +3,6 @@
 	import type { Centerline } from '@prisma/client';
 
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { format } from 'timeago.js';
 	import NavList from '$lib/components/NavList.svelte';
 
 	export let data: LayoutData;
@@ -11,7 +10,6 @@
 	const formatCenterline = (centerline: Centerline) => ({
 		href: `/centerline/${centerline.id}`,
 		name: centerline.name,
-		details: format(centerline.createdAt)
 	});
 	$: items = data.centerlines.map(formatCenterline);
 </script>

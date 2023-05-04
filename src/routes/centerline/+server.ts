@@ -6,7 +6,8 @@ import { json } from '@sveltejs/kit';
 export const GET: RequestHandler = async () => {
 	return json(
 		await prisma.centerline.findMany({
-			select: { id: true, createdAt: true, updatedAt: true, name: true, description: true }
+			select: { id: true, createdAt: true, updatedAt: true, name: true, description: true },
+			orderBy: { name: 'asc' }
 		})
 	);
 };

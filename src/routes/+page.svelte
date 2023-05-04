@@ -1,10 +1,12 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script>
+	import NavList from '$lib/components/NavList.svelte';
+
 	let loggedIn = true;
 
 	const applets = [
 		{ name: 'TOPCON Volume Calculation', href: '/topcon' },
-		{ name: 'Centerlines (IN PROGRESS)', href: '/centerline' }
+		{ name: 'Centerlines', href: '/centerline' }
 	];
 </script>
 
@@ -13,19 +15,7 @@
 		<header class="card-header text-xl font-bold">Welcome to Pipeline Applets</header>
 		<section class="p-4 flex flex-col gap-2">
 			{#if loggedIn}
-				<p>Please select an Applet</p>
-				<nav class="list-nav p-2">
-					<ul>
-						{#each applets as applet}
-							<li>
-								<a href={applet.href}>
-									<span class="badge bg-primary-500">→</span>
-									<span class="flex-auto">{applet.name}</span>
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</nav>
+				<NavList items={applets} header="Select an Applet" />
 				<form action="POST" class="flex gap-4 w-full">
 					<button on:click={() => (loggedIn = false)} class="btn btn-sm variant-outline w-full"
 						>Logout</button

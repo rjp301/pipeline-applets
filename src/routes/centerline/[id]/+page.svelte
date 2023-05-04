@@ -2,6 +2,8 @@
 	import Plot from '$lib/components/Plot.svelte';
 	import type { PageData } from './$types';
 
+	import { format } from 'timeago.js';
+
 	export let data: PageData;
 </script>
 
@@ -9,11 +11,13 @@
 	<div class="flex justify-between">
 		<div>
 			<h2>{data.centerline.name}</h2>
-			<small>{data.centerline.description}</small>
+			<small>Created {format(data.centerline.createdAt)}</small>
+			<p>{data.centerline.description}</p>
 		</div>
 
-		<form action="?/delete" method="post">
-			<button class="btn variant-filled">Delete</button>
+		<form method="post" class="flex gap-4 h-min">
+			<button class="btn variant-filled" formaction="?/delete">Delete</button>
+			<button class="btn variant-filled" formaction="?/edit">Edit</button>
 		</form>
 	</div>
 
