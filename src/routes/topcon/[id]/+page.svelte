@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import Table from '$lib/components/Table.svelte';
+	import Map from '$lib/components/Map.svelte';
 
 	export let data: PageData;
 

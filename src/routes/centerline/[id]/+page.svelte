@@ -21,5 +21,5 @@
 	</div>
 	<p>{data.centerline.description}</p>
 
-	<Map line={data.centerline.line} />
+	<Map line={data.centerline.line}/>
 </main>

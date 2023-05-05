@@ -41,6 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^4.13.0",
+		"@terraformer/spatial": "^2.1.2",
 		"@types/leaflet": "^1.9.3",
 		"leaflet": "^1.9.3",
 		"svelte-leafletjs": "^0.10.0",

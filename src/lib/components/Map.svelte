@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 	import wkt from 'terraformer-wkt-parser';
+	import terraformer from 'terraformer';
 
 	import type { LatLngExpression, Map, GeoJSON } from 'leaflet';
 	import type { GeoJsonObject, GeometryObject, BBox } from 'geojson';
@@ -17,8 +18,9 @@
 
 	// export let points: Point[] = [];
 	export let line: string;
-	$: parsedLine = wkt.parse(line) as GeometryObject & { bbox: () => BBox };
-	$: console.log(parsedLine.bbox());
+	$: parsedLine = terraformer.Tools.toGeographic(
+		wkt.parse(line) as GeoJsonObject
+	) as GeometryObject & { bbox: () => BBox };
 
 	const geomCenter = (geom: GeometryObject & { bbox: () => BBox }): LatLngExpression => {
 		if (geom === undefined) return [0, 0];
