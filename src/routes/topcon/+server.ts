@@ -9,6 +9,35 @@ export const GET: RequestHandler = async () => {
 
 /** Create topcon Run */
 export const POST: RequestHandler = async ({ request }) => {
-	const data = await request.json();
-	return json(await prisma.topconRun.create(data));
+	const {
+		width_bot,
+		slope,
+		ditch_profile,
+		total_volume,
+		data_crs,
+		KP_beg,
+		KP_end,
+		KP_rng,
+		data_pts,
+		data_rng,
+		centerline_id
+	} = await request.json();
+
+	return json(
+		await prisma.topconRun.create({
+			data: {
+				width_bot,
+				slope,
+				ditch_profile,
+				total_volume,
+				data_crs,
+				KP_beg,
+				KP_end,
+				KP_rng,
+				centerline_id,
+				data_pts: { createMany: { data: data_pts } },
+				data_rng: { createMany: { data: data_rng } }
+			}
+		})
+	);
 };
