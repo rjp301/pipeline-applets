@@ -13,6 +13,7 @@
 		'z',
 		'desc',
 		'chainage',
+		'depth',
 		'slope',
 		'width_bot',
 		'width_top',

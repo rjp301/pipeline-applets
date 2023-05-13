@@ -10,6 +10,7 @@ const data_pts_headers = [
 	'desc',
 	'geometry',
 	'chainage',
+	'depth',
 	'slope',
 	'width_bot',
 	'width_top',
