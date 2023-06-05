@@ -15,8 +15,8 @@
 	$: items = data.topconRuns.map(formatTopconRun);
 </script>
 
-<div class="flex">
-	<div class="overflow-x-scroll h-full">
+<div class="flex h-full">
+	<div class="overflow-y-scroll min-w-fit">
 		<NavList {items} home={{ href: '/topcon', name: 'New Calculation' }} />
 	</div>
 	<slot />

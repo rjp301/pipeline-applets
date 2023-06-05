@@ -20,11 +20,11 @@
 	};
 </script>
 
-<div class="table-container rounded-none">
+{#if caption}
+	<caption class="text-left font-bold text-lg">{caption}</caption>
+{/if}
+<div class="table-container rounded">
 	<table class="table table-compact table-hover rounded-none">
-		{#if caption}
-			<caption class="text-left font-bold mb-2 text-lg">{caption}</caption>
-		{/if}
 		<thead class="uppercase">
 			{#each columns as column}
 				<th scope="col">{column}</th>

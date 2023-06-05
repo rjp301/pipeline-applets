@@ -31,8 +31,8 @@
 	];
 </script>
 
-<main class="p-4 flex flex-col gap-4">
-	<div class="flex justify-between items-center">
+<main class="p-4 flex flex-col gap-4 overflow-auto w-full">
+	<div class="flex justify-between  flex-col lg:flex-row lg:items-center gap-4 items-start">
 		<div>
 			<h2>{data.topconRun.KP_rng}</h2>
 			<small>{new Date(data.topconRun.createdAt)}</small>
