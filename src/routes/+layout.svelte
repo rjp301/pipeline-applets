@@ -7,6 +7,12 @@
 	import '../app.postcss';
 	import { AppBar, AppShell } from '@skeletonlabs/skeleton';
 
+	const applets = [
+		{ name: 'TOPCON Volume Calculation', href: '/topcon' },
+		{ name: 'Centerlines', href: '/centerline' }
+	];
+
+	import CenteredCard from '$lib/components/CenteredCard.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -15,14 +21,14 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">🏗️</svelte:fragment>
-			Pipeline Applets
+			<strong><a href="/">Pipeline Applets</a></strong>
 			<svelte:fragment slot="trail">
-				<form method="POST">
-					{#if !data.user}
-						<a class="btn btn-sm" href="/auth/register">Register</a>
-						<a class="btn btn-sm" href="/auth/login">Login</a>
-					{:else}
-						<button type="submit" formaction="/auth/logout" class="btn btn-sm">Logout</button>
+				<form method="POST" class="flex items-center gap-4">
+					{#if data.user}
+						<div>{data.user.userData.name}</div>
+						<button type="submit" formaction="/auth/logout" class="btn btn-sm variant-filled">
+							Logout
+						</button>
 					{/if}
 				</form>
 			</svelte:fragment>

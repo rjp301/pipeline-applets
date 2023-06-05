@@ -1,14 +1,12 @@
-<form method="POST" class="max-w-lg">
+<form method="POST" class="grid gap-4">
 	<hgroup>
-		<h2>Login</h2>
-		<h3>Welcome back!</h3>
+		<strong class="text-lg">Login</strong>
+		<p>Welcome back!</p>
 	</hgroup>
-	<label class="label" for="email">Email</label>
-	<input class="input" type="text" id="email" name="email" required />
 
-	<label class="label" for="password">Password</label>
-	<input class="input" type="password" id="password" name="password" required />
+	<input class="input" type="email" id="email" name="email" placeholder="Email" required />
+	<input class="input" type="password" id="password" name="password" placeholder="Password" required />
 
 	<button class="btn variant-filled w-full" type="submit">Login</button>
+	<small>Don't have an account? <a href="/auth/register">Register</a></small>
 </form>
-<p>Don't have an account? <a href="/auth/register">Register</a></p>
