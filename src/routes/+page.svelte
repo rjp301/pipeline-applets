@@ -3,10 +3,7 @@
 	import CenteredCard from '$lib/components/CenteredCard.svelte';
 	import NavList from '$lib/components/NavList.svelte';
 
-	const applets = [
-		{ name: 'TOPCON Volume Calculation', href: '/topcon' },
-		{ name: 'Centerlines', href: '/centerline' }
-	];
+	import applets from "$lib/applets.json"
 
 	import type { PageData } from './$types';
 	export let data: PageData;
