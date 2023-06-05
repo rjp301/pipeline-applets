@@ -23,8 +23,8 @@ model AuthUser {
   auth_session AuthSession[]
   auth_key     AuthKey[]
 
-  first_name String
-  last_name  String
+  name String
+  email  String @unique
   company    String?
 
   @@map("auth_users")
