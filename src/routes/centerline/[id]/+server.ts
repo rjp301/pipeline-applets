@@ -11,7 +11,8 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 		where: { id: Number(params.id) },
 		include: { markers: true }
 	});
-	if (item?.user_id !== user.userId) throw error(403, 'Cannot access this resource');
+	if (!item) throw error(404, 'Resource not found');
+	if (item.user_id !== user.userId) throw error(403, 'Cannot access this resource');
 
 	return json(item);
 };

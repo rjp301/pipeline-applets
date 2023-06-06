@@ -7,7 +7,12 @@ export const GET: RequestHandler = async ({ locals }) => {
 	const { user } = await locals.auth.validateUser();
 	if (!user) throw error(401, 'Must be signed in to access this endpoint');
 
-	return json(await prisma.topconRun.findMany({ orderBy: [{ createdAt: 'desc' }] }));
+	return json(
+		await prisma.topconRun.findMany({
+			where: { user_id: user.userId },
+			orderBy: [{ createdAt: 'desc' }]
+		})
+	);
 };
 
 /** Create topcon Run */
