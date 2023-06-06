@@ -16,7 +16,7 @@
 
 		<form method="post" class="flex gap-4 h-min">
 			<button class="btn variant-filled" formaction="?/delete">Delete</button>
-			<button class="btn variant-filled" formaction="?/edit">Edit</button>
+			<button class="btn variant-filled" disabled formaction="?/edit">Edit</button>
 		</form>
 	</div>
 	<p>{data.centerline.description}</p>
