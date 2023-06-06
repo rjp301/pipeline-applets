@@ -23,9 +23,12 @@ model AuthUser {
   auth_session AuthSession[]
   auth_key     AuthKey[]
 
-  name String
-  email  String @unique
-  company    String?
+  name    String
+  email   String  @unique
+  company String?
+
+  centerlines Centerline[]
+  topcon_runs TopconRun[]
 
   @@map("auth_users")
 }
@@ -65,6 +68,8 @@ model Centerline {
 
   markers     CenterlineMarker[]
   topcon_runs TopconRun[]
+  User        AuthUser?          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String?
 
   @@map("centerlines")
 }
@@ -101,6 +106,8 @@ model TopconRun {
 
   centerline_id Int
   Centerline    Centerline @relation(fields: [centerline_id], references: [id], onDelete: Cascade)
+  User          AuthUser?  @relation(fields: [user_id], references: [id])
+  user_id       String?
 
   @@map("topcon_runs")
 }
