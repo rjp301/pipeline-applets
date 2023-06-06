@@ -68,8 +68,8 @@ model Centerline {
 
   markers     CenterlineMarker[]
   topcon_runs TopconRun[]
-  User        AuthUser?          @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id     String?
+  User        AuthUser          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String
 
   @@map("centerlines")
 }
@@ -105,9 +105,9 @@ model TopconRun {
   data_rng TopconDataRng[]
 
   centerline_id Int
-  Centerline    Centerline @relation(fields: [centerline_id], references: [id], onDelete: Cascade)
-  User          AuthUser?  @relation(fields: [user_id], references: [id])
-  user_id       String?
+  Centerline    Centerline @relation(fields: [centerline_id], references: [id])
+  User          AuthUser  @relation(fields: [user_id], references: [id])
+  user_id       String
 
   @@map("topcon_runs")
 }
