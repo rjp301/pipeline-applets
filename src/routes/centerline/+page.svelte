@@ -1,6 +1,4 @@
 <form method="POST" action="?/create" enctype="multipart/form-data" class="p-4 flex flex-col gap-4">
-	<h2>Create new Centerline</h2>
-
 	<label for="name" class="label">
 		<span>Name</span>
 		<input class="input" id="name" name="name" type="text" placeholder="Centerline Name" required />
