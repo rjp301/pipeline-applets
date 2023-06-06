@@ -2,12 +2,15 @@
 <script lang="ts">
 	import CenteredCard from '$lib/components/CenteredCard.svelte';
 	import NavList from '$lib/components/NavList.svelte';
+	import Header from '$lib/components/Header.svelte';
 
-	import applets from "$lib/applets.json"
+	import applets from '$lib/applets.json';
 
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
+
+<Header user={data.user?.userData} />
 
 <CenteredCard>
 	{#if !data.user}

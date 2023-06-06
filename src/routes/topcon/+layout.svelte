@@ -1,11 +1,13 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
+	import type { LayoutServerData } from './$types';
 	import type { TopconRun } from '@prisma/client';
 
+	import { AppShell } from '@skeletonlabs/skeleton';
 	import { format } from 'timeago.js';
 	import NavList from '$lib/components/NavList.svelte';
+	import Header from '$lib/components/Header.svelte';
 
-	export let data: LayoutData;
+	export let data: LayoutServerData;
 
 	const formatTopconRun = (run: TopconRun) => ({
 		href: `/topcon/${run.id}`,
@@ -15,9 +17,12 @@
 	$: items = data.topconRuns.map(formatTopconRun);
 </script>
 
-<div class="flex h-full">
-	<div class="overflow-y-scroll min-w-fit">
+<AppShell>
+	<svelte:fragment slot="header">
+		<Header user={data.user?.userData} />
+	</svelte:fragment>
+	<svelte:fragment slot="sidebarLeft">
 		<NavList {items} home={{ href: '/topcon', name: 'New Calculation' }} />
-	</div>
+	</svelte:fragment>
 	<slot />
-</div>
+</AppShell>
