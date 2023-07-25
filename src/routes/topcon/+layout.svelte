@@ -2,7 +2,7 @@
 	import type { LayoutServerData } from './$types';
 	import type { TopconRun } from '@prisma/client';
 
-	import { AppShell } from '@skeletonlabs/skeleton';
+	import AppShell from '$components/AppShell.svelte';
 	import { format } from 'timeago.js';
 	import NavList from '$lib/components/NavList.svelte';
 	import Header from '$lib/components/Header.svelte';

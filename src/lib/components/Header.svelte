@@ -11,14 +11,14 @@
 </script>
 
 <div class="h-16 sticky top-0 px-8 flex justify-between items-center bg-secondary border shadow">
-	<div class="flex items-center">
+	<div class="flex items-center gap-2">
 		<a href="/" class="flex items-center">
 			<Construction class="mr-4 h-8 w-8" />
 			<span class="font-extrabold text-lg">Construction Applets</span>
-			{#if current_applet}
-				<span>{current_applet.name}</span>
-			{/if}
 		</a>
+		{#if current_applet}
+			<span>{current_applet.name}</span>
+		{/if}
 	</div>
 
 	<form method="POST" class="flex items-center gap-4">

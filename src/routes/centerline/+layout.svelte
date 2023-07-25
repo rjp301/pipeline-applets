@@ -2,7 +2,7 @@
 	import type { LayoutServerData } from './$types';
 	import type { Centerline } from '@prisma/client';
 
-	import AppShell from '$components/ui/AppShell.svelte';
+	import AppShell from '$components/AppShell.svelte';
 
 	import NavList from '$lib/components/NavList.svelte';
 	import Header from '$lib/components/Header.svelte';

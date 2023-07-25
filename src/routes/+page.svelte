@@ -34,13 +34,8 @@
 			<footer><small>Built by <a href="https://rileypaul.ca">Riley Paul</a></small></footer>
 		</div>
 	{:else}
-		<Card>
-			<CardHeader>
-				<CardTitle>Select an Applet</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<NavList items={applets} />
-			</CardContent>
+		<Card class="p-4">
+			<NavList items={applets} header="Select an Applet"/>
 		</Card>
 	{/if}
 </CenteredCard>
