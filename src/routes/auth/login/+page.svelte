@@ -1,28 +1,31 @@
 <script lang="ts">
-  import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle
-  } from "$components/ui/card";
+	import { Button } from '$components/ui/button';
+	import {
+		Card,
+		CardContent,
+		CardDescription,
+		CardFooter,
+		CardHeader,
+		CardTitle
+	} from '$components/ui/card';
+	import { Input } from '$components/ui/input';
 </script>
 
 <Card>
-
-	<form method="POST" class="grid gap-4">
+	<form method="POST">
 		<CardHeader>
 			<CardTitle>Login</CardTitle>
 			<CardDescription>Welcome back!</CardDescription>
 		</CardHeader>
 
+		<CardContent class="grid gap-2">
+			<Input type="email" id="email" name="email" placeholder="Email" required />
+			<Input type="password" id="password" name="password" placeholder="Password" required />
+		</CardContent>
 
-		
-		<input class="input" type="email" id="email" name="email" placeholder="Email" required />
-		<input class="input" type="password" id="password" name="password" placeholder="Password" required />
-		
-		<button class="btn variant-filled w-full" type="submit">Login</button>
-		<small>Don't have an account? <a href="/auth/register">Register</a></small>
+		<CardFooter class="grid gap-2">
+			<Button type="submit" class="w-full">Login</Button>
+			<small>Don't have an account? <a href="/auth/register" class="link">Register</a></small>
+		</CardFooter>
 	</form>
 </Card>
