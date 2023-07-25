@@ -19,7 +19,7 @@
 	$: isActive = (href: string) => href === $page.url.pathname;
 </script>
 
-<nav class="list-nav p-2 grid gap-2">
+<nav class="p-2 grid gap-2 min-w-max">
 	{#if home}
 		<Button href={home.href}><Plus class="mr-2 w-4 h-4" /> {home.name}</Button>
 	{/if}

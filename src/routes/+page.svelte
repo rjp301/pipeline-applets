@@ -19,8 +19,6 @@
 	export let data: PageData;
 </script>
 
-<Header user={data.user?.userData} />
-
 <CenteredCard>
 	{#if !data.user}
 		<Card>
