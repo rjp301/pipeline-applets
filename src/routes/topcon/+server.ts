@@ -5,7 +5,7 @@ import { error, json } from '@sveltejs/kit';
 /** Get all Topcon Runs */
 export const GET: RequestHandler = async ({ locals, url }) => {
 	const page = Number(url.searchParams.get('page')) || 1;
-	const perPage = 5;
+	const perPage = 10;
 	const { user } = await locals.auth.validateUser();
 	if (!user) throw error(401, 'Must be signed in to access this endpoint');
 

@@ -16,10 +16,10 @@
 
 	import { page } from '$app/stores';
 	import { Plus } from 'lucide-svelte';
-	$: isActive = (href: string) => href === $page.url.pathname;
+	$: isActive = (href: string) => href.slice(0,href.indexOf("?")) === $page.url.pathname;
 </script>
 
-<nav class="p-2 grid gap-2">
+<nav class="p-2 grid gap-2 w-72">
 	{#if home}
 		<Button href={home.href} class="w-full"><Plus class="mr-2 w-4 h-4" /> {home.name}</Button>
 	{/if}

@@ -9,14 +9,15 @@
 	export let data: LayoutServerData;
 
 	import { page } from '$app/stores';
-	$: current = Number($page.url.searchParams.get('page')) || 1;
 
-	const formatTopconRun = (run: TopconRun) => ({
-		href: `/topcon/${run.id}?page=${current}`,
+	const formatTopconRun = (run: TopconRun, page: number) => ({
+		href: `/topcon/${run.id}?page=${page}`,
 		name: run.KP_rng,
 		details: format(run.createdAt)
 	});
-	$: items = data.topconRuns.runs.map(formatTopconRun);
+
+	$: current = Number($page.url.searchParams.get('page')) || 1;
+	$: items = data.topconRuns.runs.map((run: TopconRun) => formatTopconRun(run, current));
 </script>
 
 <div class="flex h-full">
