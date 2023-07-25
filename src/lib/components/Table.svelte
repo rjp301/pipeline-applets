@@ -45,7 +45,7 @@
 			{#each data as row}
 				<TableRow>
 					{#each columns as column}
-						<TableCell class="px-2 py-1 text-sm text-center">
+						<TableCell class="px-2 py-1 text-sm">
 							{displayValue(row[column])}
 						</TableCell>
 					{/each}

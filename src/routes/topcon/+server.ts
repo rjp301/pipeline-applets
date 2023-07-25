@@ -3,16 +3,22 @@ import type { RequestHandler } from './$types';
 import { error, json } from '@sveltejs/kit';
 
 /** Get all Topcon Runs */
-export const GET: RequestHandler = async ({ locals }) => {
+export const GET: RequestHandler = async ({ locals, url }) => {
+	const page = Number(url.searchParams.get('page')) || 1;
+	const perPage = 5;
 	const { user } = await locals.auth.validateUser();
 	if (!user) throw error(401, 'Must be signed in to access this endpoint');
 
-	return json(
-		await prisma.topconRun.findMany({
-			where: { user_id: user.userId },
-			orderBy: [{ createdAt: 'desc' }]
-		})
-	);
+	const runs = await prisma.topconRun.findMany({
+		where: { user_id: user.userId },
+		orderBy: [{ createdAt: 'desc' }],
+		skip: perPage * (page - 1),
+		take: perPage
+	});
+
+	const pages = Math.ceil((await prisma.topconRun.count()) / perPage);
+
+	return json({ runs, pages });
 };
 
 /** Create topcon Run */
