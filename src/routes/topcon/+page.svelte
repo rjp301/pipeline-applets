@@ -1,4 +1,9 @@
 <script lang="ts">
+	import { Input } from '$components/ui/input';
+	import { Label } from '$components/ui/label';
+	import { Button } from '$components/ui/button';
+	import { CardTitle } from '$components/ui/card';
+
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -7,22 +12,22 @@
 	method="POST"
 	action="?/performRun"
 	enctype="multipart/form-data"
-	class="p-4 flex flex-col gap-4"
+	class="p-4 max-w-xl grid gap-4"
 >
-	<strong>Perform New Ditch Volume Calculation</strong>
-	<label class="label">
-		<span>Centerline</span>
+	<CardTitle>Perform New Ditch Volume Calculation</CardTitle>
+
+	<div class="grid gap-2">
+		<Label>Centerline</Label>
 		<select id="centerline_id" name="centerline_id" class="select" required>
 			{#each data.centerlines as centerline}
 				<option value={centerline.id}>{centerline.name}</option>
 			{/each}
 		</select>
-	</label>
+	</div>
 
-	<label class="label">
-		<span>Slope of Ditch Sides [slope:1]</span>
-		<input
-			class="input"
+	<div class="grid gap-2">
+		<Label>Slope of Ditch Sides [slope:1]</Label>
+		<Input
 			id="slope"
 			name="slope"
 			type="number"
@@ -31,12 +36,11 @@
 			step="0.5"
 			required
 		/>
-	</label>
+	</div>
 
-	<label class="label">
-		<span>Width of Ditch Bottom [m]</span>
-		<input
-			class="input"
+	<div class="grid gap-2">
+		<Label>Width of Ditch Bottom [m]</Label>
+		<Input
 			id="width_bot"
 			name="width_bot"
 			type="number"
@@ -45,24 +49,25 @@
 			step="0.5"
 			required
 		/>
-	</label>
+	</div>
 
-	<label class="label">
-		<span>Designed Ditch Profile [SHP]</span>
-		<input class="input" id="ditch_shp" name="ditch_shp" type="file" accept=".shp" required />
-		<small>3D SHP file of bottom of ditch</small>
-	</label>
+	<div class="grid gap-2">
+		<Label>Designed Ditch Profile [SHP]</Label>
+		<Input id="ditch_shp" name="ditch_shp" type="file" accept=".shp" required />
+		<small class="text-muted-foreground">3D SHP file of bottom of ditch</small>
+	</div>
 
-	<label class="label">
-		<span>Surveyed Ground Profile [CSV]</span>
-		<input class="input" id="ground_csv" name="ground_csv" type="file" accept=".csv" required />
-		<small>Survey shots as CSV file in the format ID, X, Y, Z, DESC</small>
-	</label>
+	<div class="grid gap-2">
+		<Label>Surveyed Ground Profile [CSV]</Label>
+		<Input id="ground_csv" name="ground_csv" type="file" accept=".csv" required />
+		<small class="text-muted-foreground"
+			>Survey shots as CSV file in the format ID, X, Y, Z, DESC</small
+		>
+	</div>
 
-	<label class="label">
-		<span>Data CRS [EPSG:####]</span>
-		<input
-			class="input"
+	<div class="grid gap-2">
+		<Label>Data CRS [EPSG:####]</Label>
+		<Input
 			id="data_crs"
 			name="data_crs"
 			type="text"
@@ -70,11 +75,13 @@
 			value="EPSG:26910"
 			required
 		/>
-		<small> EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910' </small>
-	</label>
+		<small class="text-muted-foreground">
+			EPSG No. of the Coordinate Reference System used i.e. 'EPSG:26910'
+		</small>
+	</div>
 
-	<div class="flex gap-4">
-		<button class="btn variant-filled-primary" type="submit">Submit</button>
-		<button class="btn variant-filled-secondary" type="reset">Reset</button>
+	<div class="flex gap-2">
+		<Button type="submit">Submit</Button>
+		<Button variant="secondary" type="reset">Reset</Button>
 	</div>
 </form>

@@ -2,6 +2,7 @@
 	interface Item {
 		href: string;
 		name: string;
+		details?: string;
 	}
 
 	export let items: Item[];
@@ -29,11 +30,18 @@
 		{#each items as item}
 			<Button
 				variant={isActive(item.href) ? 'outline' : 'ghost'}
-				class="w-full justify-start"
+				class="w-full justify-start {item.details ? 'h-12' : ''}"
 				href={item.href}
 			>
 				<ArrowRight class="mr-2 h-4 w-4" />
-				{item.name}
+				{#if item.details}
+					<div>
+						<div>{item.name}</div>
+						<div class="text-xs font-normal text-muted-foreground">{item.details}</div>
+					</div>
+				{:else}
+					{item.name}
+				{/if}
 			</Button>
 		{/each}
 	</div>

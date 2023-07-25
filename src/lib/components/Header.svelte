@@ -10,7 +10,7 @@
 	$: current_applet = applets.find((i) => $page.url.pathname.startsWith(i.href));
 </script>
 
-<div class="h-16 sticky top-0 px-8 flex justify-between items-center bg-secondary border shadow">
+<div class="h-16 sticky top-0 px-8 flex justify-between items-center border-b shadow">
 	<div class="flex items-center gap-2">
 		<a href="/" class="flex items-center">
 			<Construction class="mr-4 h-8 w-8" />

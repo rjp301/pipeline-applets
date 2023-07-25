@@ -2,9 +2,12 @@
 	import { Input } from "$components/ui/input";
 	import { Label } from "$components/ui/label";
 	import { Button } from "$components/ui/button";
+	import { CardTitle } from "$components/ui/card";
 </script>
 
 <form method="POST" action="?/create" enctype="multipart/form-data" class="p-4 max-w-xl grid gap-4">
+	<CardTitle>Create New Centerline</CardTitle>
+	
 	<div class="grid gap-2">
 		<Label for="name">
 			Name

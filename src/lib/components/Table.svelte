@@ -3,6 +3,17 @@
 	export let data: any[];
 	export let caption: string | undefined = undefined;
 
+	import {
+		Table,
+		TableBody,
+		TableCaption,
+		TableCell,
+		TableHead,
+		TableHeader,
+		TableRow
+	} from '$components/ui/table';
+	import CardTitle from './ui/card/CardTitle.svelte';
+
 	const countDecimals = (num: number) => {
 		if (Math.floor(num) === num) return 0;
 		return num.toString().split('.')[1].length;
@@ -20,26 +31,26 @@
 	};
 </script>
 
-<div class="table-container rounded-none">
-	<table class="table table-compact table-hover rounded-none">
-		{#if caption}
-			<caption class="text-left font-bold mb-2">{caption}</caption>
-		{/if}
-		<thead class="uppercase">
-			{#each columns as column}
-				<th scope="col">{column}</th>
-			{/each}
-		</thead>
-		<tbody class="text-sm">
+<div>
+	{#if caption}<strong>{caption}</strong>{/if}
+	<Table>
+		<TableHeader class="uppercase">
+			<TableRow>
+				{#each columns as column}
+					<TableHead>{column}</TableHead>
+				{/each}
+			</TableRow>
+		</TableHeader>
+		<TableBody>
 			{#each data as row}
-				<tr class="border-t">
+				<TableRow>
 					{#each columns as column}
-						<td class="px-2 py-1 text-sm text-center">
+						<TableCell class="px-2 py-1 text-sm text-center">
 							{displayValue(row[column])}
-						</td>
+						</TableCell>
 					{/each}
-				</tr>
+				</TableRow>
 			{/each}
-		</tbody>
-	</table>
+		</TableBody>
+	</Table>
 </div>

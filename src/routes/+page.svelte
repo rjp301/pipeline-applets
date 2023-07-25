@@ -15,6 +15,7 @@
 	import applets from '$lib/applets.json';
 
 	import type { PageData } from './$types';
+	import { Button } from '$components/ui/button';
 	export let data: PageData;
 </script>
 
@@ -22,20 +23,26 @@
 
 <CenteredCard>
 	{#if !data.user}
-		<div class="grid gap-2">
-			<hrgoup>
-				<strong class="text-lg">Login or Register</strong>
-				<p>You must be logged in to use these tools</p>
-			</hrgoup>
-			<div class="flex gap-4">
-				<a class="btn btn-sm variant-filled w-full" href="/auth/login">Login</a>
-				<a class="btn btn-sm variant-filled w-full" href="/auth/register">Register</a>
-			</div>
-			<footer><small>Built by <a href="https://rileypaul.ca">Riley Paul</a></small></footer>
-		</div>
+		<Card>
+			<CardHeader>
+				<CardTitle>Login or Register</CardTitle>
+				<CardDescription>You must be logged in to use these tools</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<div class="flex gap-2">
+					<Button href="/auth/login" class="w-full">Login</Button>
+					<Button href="/auth/register" class="w-full" variant="secondary">Register</Button>
+				</div>
+			</CardContent>
+			<CardFooter>
+				<small class="text-muted-foreground">
+					Built by <a href="https://rileypaul.ca" class="link">Riley Paul</a>
+				</small>
+			</CardFooter>
+		</Card>
 	{:else}
 		<Card class="p-4">
-			<NavList items={applets} header="Select an Applet"/>
+			<NavList items={applets} header="Select an Applet" />
 		</Card>
 	{/if}
 </CenteredCard>
