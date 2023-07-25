@@ -30,17 +30,19 @@
 	{/if}
 	<ul>
 		{#each items as item}
-			<li>
-				<a href={item.href} class={classesActive(item.href)} data-sveltekit-preload-data>
-					<span class="badge bg-primary-500">{item.badge || '→'}</span>
-					<div class="flex flex-col">
-						<span class="flex-auto">{item.name}</span>
+			<a href={item.href} class={classesActive(item.href)} data-sveltekit-preload-data>
+				<li
+					class="flex items-center space-x-4 rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+				>
+					<i class="h-5 w-5">{item.badge || '→'}</i>
+					<div class="space-y-1">
+						<p class="text-sm font-medium leading-none">{item.name}</p>
 						{#if item.details}
-							<small>{item.details}</small>
+							<p class="text-sm text-muted-foreground">{item.details}</p>
 						{/if}
 					</div>
-				</a>
-			</li>
+				</li>
+			</a>
 		{/each}
 	</ul>
 </nav>

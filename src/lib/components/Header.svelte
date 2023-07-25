@@ -1,29 +1,30 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
+	import { Construction } from 'lucide-svelte';
 	import type { UserSchema } from 'lucia-auth';
 	export let user: UserSchema | undefined;
 
 	import applets from '$lib/applets.json';
+	import { Button } from './ui/button';
 	$: current_applet = applets.find((i) => $page.url.pathname.startsWith(i.href));
 </script>
 
-<div class="h-16 sticky top-0 px-8 flex justify-center">
-	🏗️
-
+<div class="h-16 sticky top-0 px-8 flex justify-between items-center bg-secondary border shadow">
 	<div class="flex items-center">
-		<a href="/" class="mr-2"><div><strong>Pipeline Applets</strong></div></a>
-		{#if current_applet}
-			<div>{current_applet.name}</div>
-		{/if}
+		<a href="/" class="flex items-center">
+			<Construction class="mr-4 h-8 w-8" />
+			<span class="font-extrabold text-lg">Construction Applets</span>
+			{#if current_applet}
+				<span>{current_applet.name}</span>
+			{/if}
+		</a>
 	</div>
 
-	<form method="POST" class="flex items-center gap-4" >
+	<form method="POST" class="flex items-center gap-4">
 		{#if user}
-			<div>{user.name}</div>
-			<button type="submit" formaction="/auth/logout" class="btn btn-sm variant-filled">
-				Logout
-			</button>
+			<div class="text-muted-foreground">{user.name}</div>
+			<Button type="submit" formaction="/auth/logout">Logout</Button>
 		{/if}
 	</form>
 </div>

@@ -3,6 +3,14 @@
 	import CenteredCard from '$lib/components/CenteredCard.svelte';
 	import NavList from '$lib/components/NavList.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import {
+		Card,
+		CardContent,
+		CardDescription,
+		CardFooter,
+		CardHeader,
+		CardTitle
+	} from '$components/ui/card';
 
 	import applets from '$lib/applets.json';
 
@@ -26,6 +34,13 @@
 			<footer><small>Built by <a href="https://rileypaul.ca">Riley Paul</a></small></footer>
 		</div>
 	{:else}
-		<NavList items={applets} header="Select an Applet" />
+		<Card>
+			<CardHeader>
+				<CardTitle>Select an Applet</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<NavList items={applets} />
+			</CardContent>
+		</Card>
 	{/if}
 </CenteredCard>
