@@ -29,7 +29,7 @@
 	<div class="grid gap-1">
 		{#each items as item}
 			<Button
-				variant={isActive(item.href) ? 'outline' : 'ghost'}
+				variant={isActive(item.href) ? 'secondary' : 'ghost'}
 				class="w-full justify-start {item.details ? 'h-12' : ''}"
 				href={item.href}
 			>
