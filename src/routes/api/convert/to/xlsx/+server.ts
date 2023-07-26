@@ -1,3 +1,4 @@
+import { error, type RequestHandler } from '@sveltejs/kit';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import ExcelJS from 'exceljs';
 
@@ -31,26 +32,20 @@ function createWorkbook(data: WorkbookData): Promise<ExcelJS.Buffer> {
 	return workbook.xlsx.writeBuffer();
 }
 
-export default async function (request: VercelRequest, response: VercelResponse) {
-	const data = request.body as WorkbookData;
+export const POST: RequestHandler = async ({ request }) => {
+	const data = (await request.json()) as WorkbookData;
 
 	try {
 		const excelBuffer = await createWorkbook(data);
 
 		// Set the response headers to trigger the file download
-		response.setHeader(
-			'Content-Type',
-			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-		);
-		response.setHeader(
-			'Content-Disposition',
-			`attachment; filename=${data.filename || 'workbook'}.xlsx`
-		);
-
-		// Send the Excel file as a response
-		response.send(excelBuffer);
-	} catch (error) {
-		console.error('Error while converting JSON to Excel:', error);
-		response.status(500).send('Internal Server Error');
+		return new Response(excelBuffer, {
+			headers: {
+				'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				'Content-Disposition': `attachment; filename=${data.filename || 'workbook'}.xlsx`
+			}
+		});
+	} catch (err: any) {
+		throw error(500, err);
 	}
-}
+};

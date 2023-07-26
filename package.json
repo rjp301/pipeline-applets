@@ -49,6 +49,7 @@
 		"@types/uuid": "^9.0.2",
 		"@vercel/node": "^2.15.6",
 		"adm-zip": "^0.5.10",
+		"arraybuffer-to-buffer": "^0.0.7",
 		"chainage": "^1.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
