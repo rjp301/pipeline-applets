@@ -3,64 +3,60 @@ import type { RequestHandler } from './$types';
 import { API_URL } from '$env/static/private';
 
 const data_pts_headers = [
-	'num',
-	'x',
-	'y',
-	'z',
-	'desc',
-	'geometry',
-	'chainage',
-	'depth',
-	'slope',
-	'width_bot',
-	'width_top',
-	'area'
+	{ header: 'NUM', key: 'num' },
+	{ header: 'X', key: 'x' },
+	{ header: 'Y', key: 'y' },
+	{ header: 'Z', key: 'z' },
+	{ header: 'DESC', key: 'desc' },
+	{ header: 'GEOMETRY', key: 'geometry' },
+	{ header: 'CHAINAGE', key: 'chainage' },
+	{ header: 'DEPTH', key: 'depth' },
+	{ header: 'SLOPE', key: 'slope' },
+	{ header: 'WIDTH_BOT', key: 'width_bot' },
+	{ header: 'WIDTH_TOP', key: 'width_top' },
+	{ header: 'AREA', key: 'area' }
 ];
 
 const data_rng_headers = [
-	'KP_beg',
-	'KP_end',
-	'area_beg',
-	'area_end',
-	'area_avg',
-	'length',
-	'volume'
+	{ header: 'KP_BEG', key: 'KP_beg' },
+	{ header: 'KP_END', key: 'KP_end' },
+	{ header: 'AREA_BEG', key: 'area_beg' },
+	{ header: 'AREA_END', key: 'area_end' },
+	{ header: 'AREA_AVG', key: 'area_avg' },
+	{ header: 'LENGTH', key: 'length' },
+	{ header: 'VOLUME', key: 'volume' }
 ];
 
-interface Record {
-	[key: string]: string | number | boolean | null | undefined;
-}
-
-const convertRecord = (record: Record, headers: Array<keyof Record>): Record =>
-	Object.fromEntries(
-		headers
-			.filter((key) => key in record)
-			.map((key) => [typeof key === 'string' ? key.toUpperCase() : key, record[key]])
-	);
+type WorkbookData = {
+	filename: string;
+	sheets: {
+		sheetname: string;
+		columns: { header: string; key: string; width?: number }[];
+		records: { [key: string]: any }[];
+	}[];
+};
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
 	const data = await fetch(`/topcon/${params.id}`).then((res) => res.json());
 
-	const xlsxData = {
-		filename: `${data.KP_rng}.xlsx`,
+	const xlsxData: WorkbookData = {
+		filename: `${data.KP_rng}`,
 		sheets: [
 			{
 				sheetname: 'data_pts',
-				records: data.data_pts.map((record: object) =>
-					convertRecord(record as Record, data_pts_headers)
-				)
+				columns: data_pts_headers,
+				records: data.data_pts
 			},
 			{
 				sheetname: 'data_rng',
-				records: data.data_rng.map((record: object) =>
-					convertRecord(record as Record, data_rng_headers)
-				)
+				columns: data_rng_headers,
+				records: data.data_rng
 			}
 		]
 	};
 
 	try {
-		const res = await fetch(`${API_URL}/api/convert/xlsx`, {
+		const res = await fetch(`${API_URL}/api/json-to-xlsx`, {
 			method: 'POST',
 			body: JSON.stringify(xlsxData),
 			headers: {
@@ -69,6 +65,7 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 		});
 		return new Response(res.body, { headers: res.headers });
 	} catch (err) {
+		console.error(err);
 		throw error(500, 'Could not download XLSX');
 	}
 };

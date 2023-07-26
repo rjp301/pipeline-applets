@@ -1,0 +1,45 @@
+{
+	"filename": "test_excel.xlsx",
+	"sheets": [
+		{
+			"sheetname": "gumdroops",
+			"columns": [
+				{ "header": "Hello", "key": "hello" },
+				{ "header": "Goodbye", "key": "goodbye" }
+			],
+			"records": [
+				{ "hello": 1, "goodbye": 3 },
+				{ "hello": 1, "goodbye": 3 },
+				{ "hello": 1, "goodbye": 3 },
+				{ "hello": 1, "goodbye": 3 },
+				{ "hello": 1, "goodbye": 6 }
+			]
+		},
+		{
+			"sheetname": "gumdrops",
+			"columns": [
+				{ "header": "Hello", "key": "hello" },
+				{ "header": "Bonjour", "key": "bonjour" }
+			],
+			"records": [
+				{ "hello": 1, "bonjour": 3 },
+				{ "hello": 1, "bonjour": 3 },
+				{ "hello": 1, "bonjour": 3 }
+			]
+		},
+		{
+			"sheetname": "gumdroo000ps",
+			"columns": [
+				{ "header": "Toodles", "key": "toodle-loo" },
+				{ "header": "Good-bye", "key": "goodbye" }
+			],
+			"records": [
+				{ "toodle-loo": 1, "goodbye": 3 },
+				{ "toodle-loo": 1, "goodbye": 3 },
+				{ "toodle-loo": 1, "goodbye": 3 },
+				{ "toodle-loo": 4, "goodbye": 3 },
+				{ "toodle-loo": 1, "goodbye": 3 }
+			]
+		}
+	]
+}

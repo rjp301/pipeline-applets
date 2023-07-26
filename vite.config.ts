@@ -6,5 +6,8 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	ssr: { noExternal: ['chart.js'] }
+	ssr: { noExternal: ['chart.js'] },
+	server: {
+		fs: { allow: ['..'] }
+	}
 });
