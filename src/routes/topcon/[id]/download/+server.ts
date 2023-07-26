@@ -56,7 +56,7 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 	};
 
 	try {
-		const res = await fetch(`${API_URL}/api/json-to-xlsx`, {
+		const res = await fetch(`/api/convert/to/xlsx`, {
 			method: 'POST',
 			body: JSON.stringify(xlsxData),
 			headers: {
