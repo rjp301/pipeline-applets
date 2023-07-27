@@ -1,6 +1,0 @@
-{
-	"extends": "../../../../../tsconfig.json",
-	"include": [
-		"../../../../../api/zipped-shp-to-json.ts"
-	]
-}
