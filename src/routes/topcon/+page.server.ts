@@ -5,6 +5,7 @@ import { API_URL } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
 
 import type { TopconDataPts, TopconDataRng } from '@prisma/client';
+import parseCenterline from './parseCenterline';
 
 interface APIResponse {
 	ditch_profile: string;
@@ -24,35 +25,26 @@ export const actions: Actions = {
 	performRun: async ({ request, fetch }) => {
 		// extract form data
 		const formData = await request.formData();
-		const { centerline_id, width_bot, slope, data_crs } = Object.fromEntries(formData);
+		const { centerline_id, width_bot, slope, data_crs, ground_csv, ditch_shp } =
+			Object.fromEntries(formData);
 
 		// append centerline to form data
-		const centerline = await fetch(`/centerline/${centerline_id}`).then((res) => res.json());
-		formData.append('centerline', JSON.stringify(centerline));
-
-		// send files to calculation server to be processed
-		const data: APIResponse = await fetch(`${API_URL}/api/topcon/`, {
-			method: 'POST',
-			body: formData,
-			headers: { boundary: '----WebKitFormBoundary7MA4YWxkTrZu0gW' }
-		})
-			.then((res) => res.json())
-			.catch((err) => {
-				console.error(err);
-				throw fail(500, { message: 'Could not transform data' });
-			});
+		const centerline = parseCenterline(
+			await fetch(`/centerline/${centerline_id}`).then((res) => res.json())
+		);
+			console.log(centerline)
 
 		// create new topcon run in database
-		const topcon = await fetch('/topcon', {
-			method: 'POST',
-			body: JSON.stringify({
-				width_bot: Number(width_bot),
-				slope: Number(slope),
-				centerline_id: Number(centerline_id),
-				data_crs,
-				...data
-			})
-		}).then((res) => res.json());
+		// const topcon = await fetch('/topcon', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify({
+		// 		width_bot: Number(width_bot),
+		// 		slope: Number(slope),
+		// 		centerline_id: Number(centerline_id),
+		// 		data_crs,
+		// 		...data
+		// 	})
+		// }).then((res) => res.json());
 
 		// navigate to the new run
 		throw redirect(303, `/topcon/${topcon.id}`);

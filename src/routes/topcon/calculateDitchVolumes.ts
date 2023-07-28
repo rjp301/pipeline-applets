@@ -1,11 +1,11 @@
 import { Centerline, Point, Polyline, formatKP } from 'chainage';
 
-type SurveyPoint = {
-	num: string;
+export type SurveyPoint = {
+	num: string | number;
 	x: number;
 	y: number;
 	z: number;
-	desc: string;
+	desc: string | number;
 };
 
 type PointResult = SurveyPoint & {
