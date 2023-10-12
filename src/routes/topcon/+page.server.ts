@@ -39,7 +39,7 @@ export const actions: Actions = {
 			.then((res) => res.json())
 			.catch((err) => {
 				console.error(err);
-				throw fail(500, { message: 'Could not transform data' });
+				return fail(500, { message: 'Could not transform data' });
 			});
 
 		// create new topcon run in database

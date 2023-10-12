@@ -1,0 +1,39 @@
+---
+import { format } from "timeago.js";
+import type { TopconRun } from "@prisma/client";
+import NavList from "@/components/NavList.astro";
+import Header from "@/components/Header.astro";
+import Pagination from "@/components/Pagination.astro";
+
+const page = Number(Astro.url.searchParams.get("page")) || 1;
+
+const topconRuns = (await fetch(
+  `${Astro.url.origin}/api/topcon?page=${page}`
+).then((res) => res.json())) as { runs: TopconRun[]; pages: number };
+
+const formatTopconRun = (run: TopconRun, page: number) => ({
+  href: `/${run.id}?page=${page}`,
+  name: run.KP_rng,
+  details: format(run.createdAt),
+});
+---
+
+<div class="flex flex-col h-screen w-full">
+  <Header title="TOPCON Volumes" />
+  <div class="flex-1 overflow-hidden">
+    <div class="flex h-full">
+      <div
+        class="border-r shadow overflow-y-scroll flex flex-col justify-between"
+      >
+        <NavList
+          items={topconRuns.runs.map((run) => formatTopconRun(run, page))}
+          home={{ href: "/", name: "New Calculation" }}
+        />
+        <Pagination total={topconRuns.pages} />
+      </div>
+      <div class="flex-1 overflow-auto">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

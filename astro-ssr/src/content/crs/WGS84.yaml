@@ -1,0 +1,3 @@
+name: WGS84
+epsg: 4326
+proj: +proj=longlat +datum=WGS84 +no_defs +type=crs

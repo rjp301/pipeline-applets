@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import { Button } from "./ui/button";
+---
+
+<div class="h-16 px-8 flex justify-between items-center border-b shadow">
+  <div class="flex items-center gap-2">
+    <a href="/" class="flex items-center">
+      <span class="font-extrabold text-lg">{title}</span>
+    </a>
+  </div>
+  <small class="text-muted-foreground">
+    App by <a class="underline" href="https://rileypaul.ca">Riley Paul</a>
+  </small>
+</div>

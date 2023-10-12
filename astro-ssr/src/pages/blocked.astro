@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+---
+
+<Layout>
+  <div class="flex justify-center pt-20">
+    <Card className="w-[300px]">
+      <CardHeader>
+        <CardTitle>TOPCON Volumes</CardTitle>
+        <CardDescription>
+          Your IP address is not whitelisted for this site
+        </CardDescription>
+        <CardDescription>
+          If you believe this to be an error, please get in touch with <a
+            href="mailto:rileypaul96@gmail.com"
+            class="underline">Riley Paul</a
+          >
+        </CardDescription>
+      </CardHeader>
+      <CardFooter>
+        <Button className="w-full" variant="destructive">
+          Permission Denied
+        </Button>
+      </CardFooter>
+    </Card>
+  </div>
+</Layout>

@@ -1,0 +1,3 @@
+name: NAD83 / UTM zone 10N
+epsg: 26910
+proj: +proj=utm +zone=10 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs

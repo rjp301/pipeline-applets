@@ -1,0 +1,59 @@
+---
+interface Props {
+  columns: string[];
+  data: any[];
+  caption?: string;
+}
+
+const { columns, data, caption } = Astro.props;
+
+import {
+  Table as ShadTable,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+const countDecimals = (num: number) => {
+  if (Math.floor(num) === num) return 0;
+  return num.toString().split(".")[1].length;
+};
+
+const displayNumber = (num: number, cutoff: number) => {
+  if (countDecimals(num) <= cutoff) return num.toString();
+  return num.toFixed(cutoff);
+};
+
+const displayValue = (value: number | string | null) => {
+  if (value === null) return "";
+  if (typeof value === "string") return value;
+  return displayNumber(value, 2);
+};
+---
+
+<div>
+  {caption && <strong>{caption}</strong>}
+  <ShadTable>
+    <TableHeader className="uppercase">
+      <TableRow>
+        {columns.map((column) => <TableHead>{column}</TableHead>)}
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {
+        data.map((row) => (
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell className="px-2 py-1 text-sm">
+                {displayValue(row[column])}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))
+      }
+    </TableBody>
+  </ShadTable>
+</div>

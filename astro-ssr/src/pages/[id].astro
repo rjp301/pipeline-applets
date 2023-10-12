@@ -1,0 +1,103 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import TopconLayout from "@/layouts/TopconLayout.astro";
+import Table from "@/components/Table.astro";
+
+import { CardDescription, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+import type { TopconRun, TopconDataPts, TopconDataRng } from "@prisma/client";
+type TopconRunData = TopconRun & {
+  data_pts: TopconDataPts[];
+  data_rng: TopconDataRng[];
+};
+
+const response = await fetch(
+  `${Astro.url.origin}/api/topcon/${Astro.params.id}`
+);
+const topconRun = (await response.json()) as TopconRunData;
+
+const data_pts_head = [
+  "num",
+  "x",
+  "y",
+  "z",
+  "desc",
+  "chainage",
+  "depth",
+  "slope",
+  "width_bot",
+  "width_top",
+  "area",
+];
+
+const data_rng_head = [
+  "KP_beg",
+  "KP_end",
+  "area_beg",
+  "area_end",
+  "area_avg",
+  "length",
+  "volume",
+];
+---
+
+<Layout>
+  <TopconLayout>
+    <main class="p-4 flex flex-col gap-4 overflow-auto w-full">
+      <div
+        class="flex justify-between flex-col lg:flex-row lg:items-center gap-4 items-start"
+      >
+        <div>
+          <CardTitle>{topconRun.KP_rng}</CardTitle>
+          <CardDescription>
+            {
+              new Date(topconRun.createdAt).toLocaleString("en-GB", {
+                timeZone: "UTC",
+              })
+            }
+          </CardDescription>
+        </div>
+
+        <div class="flex gap-2">
+          <form
+            method="POST"
+            action={`${Astro.url.origin}/api/topcon/${Astro.params.id}/delete`}
+            onsubmit="
+            return confirm('Are you sure you want to delete this?');
+            "
+            class="flex gap-4"
+          >
+            <Button variant="destructive" type="submit">Delete</Button>
+          </form>
+          <a
+            href={`${Astro.url.origin}/api/topcon/${Astro.params.id}/download`}
+            download
+          >
+            <Button>Download Excel</Button>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <Badge>
+          Total {Math.round(topconRun.total_volume)} m<sup>3</sup>
+        </Badge>
+        <Badge variant="outline">Width Bottom {topconRun.width_bot} m</Badge>
+        <Badge variant="outline">Ditch Slope {topconRun.slope}:1</Badge>
+      </div>
+
+      <Table
+        columns={data_pts_head}
+        data={topconRun.data_pts}
+        caption="Point Data"
+      />
+      <Table
+        columns={data_rng_head}
+        data={topconRun.data_rng}
+        caption="Range Data"
+      />
+    </main>
+  </TopconLayout>
+</Layout>

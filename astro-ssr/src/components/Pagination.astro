@@ -1,0 +1,31 @@
+---
+interface Props {
+  total: number;
+}
+
+import { Button } from "./ui/button";
+
+const { total } = Astro.props;
+const baseUrl = Astro.url.pathname;
+const current = Number(Astro.url.searchParams.get("page")) || 1;
+const prevPage = Math.max(1, current - 1);
+const nextPage = Math.min(total, current + 1);
+---
+
+<div
+  class="flex items-center justify-between px-4 py-2 sticky bottom-0 bg-background shadow border-t"
+>
+  <a href={`${baseUrl}?page=${prevPage}`}>
+    <Button disabled={current === 1} size="icon" variant="ghost">
+      <i class="fa-solid fa-chevron-left"></i>
+    </Button>
+  </a>
+  <div class="text-sm text-muted-foreground select-none">
+    Page {current} / {total}
+  </div>
+  <a href={`${baseUrl}?page=${nextPage}`}>
+    <Button disabled={current === total} size="icon" variant="ghost">
+      <i class="fa-solid fa-chevron-right"></i>
+    </Button>
+  </a>
+</div>
